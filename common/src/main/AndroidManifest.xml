@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/WinterSportCoachesTheme">
-        <activity android:name="com.wintersportcoaches.common.registration.RegistrationActivity"></activity>
+        <activity android:name="com.wintersportcoaches.common.registration.LoginActivity"></activity>
     </application>
 
 </manifest>

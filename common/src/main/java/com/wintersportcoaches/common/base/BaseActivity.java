@@ -16,10 +16,7 @@ import com.wintersportcoaches.common.user.BaseUser;
  */
 public class BaseActivity extends AppCompatActivity {
 
-    @Override
-    public void setContentView(int layoutResID) {
-        super.setContentView(layoutResID);
-    }
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

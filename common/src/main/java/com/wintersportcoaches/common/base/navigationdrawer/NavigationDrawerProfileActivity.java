@@ -15,7 +15,7 @@ import android.widget.ListView;
 
 import com.artem.common.R;
 import com.wintersportcoaches.common.base.ToolbarActivity;
-import com.wintersportcoaches.common.registration.RegistrationActivity;
+import com.wintersportcoaches.common.registration.LoginActivity;
 import com.wintersportcoaches.common.ui.views.NavigarionDrawerHeaderView;
 
 
@@ -103,7 +103,7 @@ public abstract class NavigationDrawerProfileActivity  extends ToolbarActivity i
             @Override
             public void run() {
                 if (isLoginRequired && !isLogin()) {
-                    Intent intent = new Intent(NavigationDrawerProfileActivity.this, RegistrationActivity.class);
+                    Intent intent = new Intent(NavigationDrawerProfileActivity.this, LoginActivity.class);
                     startActivity(intent);
                 } else {
                     tapHandler.onTap();

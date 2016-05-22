@@ -4,4 +4,7 @@
     <string name="my_lessons">Мои занятия</string>
     <string name="instructors">Инструкторы</string>
     <string name="chat_list">Чаты занятий</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

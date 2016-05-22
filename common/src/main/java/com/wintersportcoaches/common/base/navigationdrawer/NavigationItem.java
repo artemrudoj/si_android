@@ -8,7 +8,6 @@ public class NavigationItem implements TapHandler {
 
     int icon;
     int text;
-    boolean isCustom;
     boolean loginRequired = false;
     boolean shouldCloseDrawer = true;
     TapHandler onTapHandler = null;
@@ -18,20 +17,9 @@ public class NavigationItem implements TapHandler {
         return shouldCloseDrawer;
     }
 
-    public NavigationItem(int icon, int text, boolean isCustom, boolean loginRequired, boolean validationNeeded ,boolean shoudClose, TapHandler onTapHandler) {
-        this.icon = icon;
-        this.text = text;
-        this.isCustom = isCustom;
-        this.loginRequired = loginRequired;
-        this.onTapHandler = onTapHandler;
-        this.validationNeeded = validationNeeded;
-        this.shouldCloseDrawer = shoudClose;
-    }
 
 
-    public boolean isCustom() {
-        return isCustom;
-    }
+
 
     public int getText() {
         return text;
@@ -49,7 +37,6 @@ public class NavigationItem implements TapHandler {
     public NavigationItem(int icon, int text, boolean isCustom) {
         this.icon = icon;
         this.text = text;
-        this.isCustom = isCustom;
     }
 
     public NavigationItem(int text, TapHandler onTapHandler) {
@@ -57,10 +44,9 @@ public class NavigationItem implements TapHandler {
         this.onTapHandler = onTapHandler;
     }
 
-    public NavigationItem(int icon, int text, boolean isCustom, boolean loginRequired, boolean validationNeeded, TapHandler onTapHandler) {
+    public NavigationItem(int icon, int text, boolean loginRequired,  boolean validationNeeded, TapHandler onTapHandler) {
         this.icon = icon;
         this.text = text;
-        this.isCustom = isCustom;
         this.loginRequired = loginRequired;
         this.onTapHandler = onTapHandler;
         this.validationNeeded = validationNeeded;
