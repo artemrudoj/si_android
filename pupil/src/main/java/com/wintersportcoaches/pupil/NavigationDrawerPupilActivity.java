@@ -40,19 +40,19 @@ public class NavigationDrawerPupilActivity extends NavigationDrawerProfileActivi
                 startActivity(new Intent(NavigationDrawerPupilActivity.this, CoachesListContainerActivity.class));
             }
         }));
-        items.add(new NavigationItem(R.drawable.vector_chats_ic, R.string.chat_list, true, true, false, false, new TapHandler() {
+        items.add(new NavigationItem(R.drawable.vector_chats_ic, R.string.chat_list, false, false, false, false, new TapHandler() {
             @Override
             public void onTap() {
                 startActivity(new Intent(NavigationDrawerPupilActivity.this, ChatsContainerActivity.class));
             }
         }));
-        items.add(new NavigationItem(R.drawable.vector_history_ic, R.string.chat_list, true, true, false, false, new TapHandler() {
+        items.add(new NavigationItem(R.drawable.vector_history_ic, R.string.history_list, false, false, false, false, new TapHandler() {
             @Override
             public void onTap() {
                 startActivity(new Intent(NavigationDrawerPupilActivity.this, HistoryLessonActivity.class));
             }
         }));
-        items.add(new NavigationItem(R.drawable.vector_log_out_icon, R.string.log_out, true, true, false, false, new TapHandler() {
+        items.add(new NavigationItem(R.drawable.vector_log_out_icon, R.string.log_out, false, false, false, false, new TapHandler() {
             @Override
             public void onTap() {
                 //startActivity(new Intent(NavigationDrawerPupilActivity.this, HistoryLessonActivity.class));

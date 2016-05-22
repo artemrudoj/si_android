@@ -12,5 +12,7 @@ public class ChatsContainerActivity extends NavigationDrawerPupilActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setToolbar(R.string.chat_list);
+        addHomeProfileButton();
     }
 }
