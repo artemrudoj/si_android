@@ -1,0 +1,109 @@
+package com.wintersportcoaches.common.user;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+
+import com.artem.common.R;
+import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+
+/**
+ * Created by artem on 22.05.16.
+ */
+public class BaseUser {
+
+    public static final String DEFAULT_FIRST_NAME = "Регистрация";
+    private static final String DEFAULT_LAST_NAME = "";
+    private static final String DEFAULT_TELEPOHNE = "";
+
+    private static final String FIRST_NAME_ARG = "firstName";
+    private static final String LAST_NAME_ARG = "lastName";
+    private static final String TELEPHONE_ARG = "telephone";
+    private static final String PHOTO_BACKEND_ARG = "PHOTO_BACKEND_ARG";
+    private static final String LOGIN_ARG = "login";
+    private static final String HASH_ARG = "hash";
+    private static final String ID_ARGS = "id";
+    private static final String RATING_ARG = "rating";
+    private static final String EMAIL_ARG = "EMAIL_ARG";
+
+    protected SharedPreferences preferences;
+
+    @SerializedName("id") private String userId;
+
+    @SerializedName("first_name") private String firstName;
+
+    @SerializedName("last_name") private String lastName;
+
+    @SerializedName("email") private String email;
+
+    @SerializedName("phone") private String phone;
+
+    @SerializedName("rating") private float rating;
+
+    @SerializedName("image") private String photoUrl;
+
+
+    private transient boolean isLogin;
+    private String hash;
+
+    public String getHash() {
+        return hash;
+    }
+
+    public boolean isLogin() {
+        return isLogin;
+    }
+
+
+    public BaseUser(Context context) {
+        String appName = context.getString(R.string.app_name);
+        preferences = context.getSharedPreferences(appName, Context.MODE_PRIVATE);
+        firstName = preferences.getString(FIRST_NAME_ARG, DEFAULT_FIRST_NAME);
+        lastName = preferences.getString(LAST_NAME_ARG, DEFAULT_LAST_NAME);
+        phone = preferences.getString(TELEPHONE_ARG, DEFAULT_TELEPOHNE);
+        photoUrl = preferences.getString(PHOTO_BACKEND_ARG, "");
+        isLogin = preferences.getBoolean(LOGIN_ARG, false);
+        hash = preferences.getString(HASH_ARG, "");
+        userId = preferences.getString(ID_ARGS, "");
+        rating = preferences.getFloat(RATING_ARG, 0);
+        email = preferences.getString(EMAIL_ARG, "");
+    }
+
+    public void saveUser(Context context) {
+        String appName = context.getString(R.string.app_name);
+        preferences = context.getSharedPreferences(appName, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean(LOGIN_ARG, true);
+        editor.putString(FIRST_NAME_ARG, firstName);
+        editor.putString(LAST_NAME_ARG, lastName);
+        editor.putString(TELEPHONE_ARG, phone);
+        editor.putString(PHOTO_BACKEND_ARG, photoUrl);
+        editor.putString(HASH_ARG, hash);
+        editor.putString(ID_ARGS, userId);
+        editor.putString(EMAIL_ARG, email);
+        editor.putFloat(RATING_ARG, rating);
+        editor.apply();
+    }
+
+    public void exit(Context context) {
+        String appName = context.getString(R.string.app_name);
+        preferences = context.getSharedPreferences(appName, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.commit();
+        clearProperties();
+    }
+
+    public void clearProperties() {
+        firstName = DEFAULT_FIRST_NAME;
+        lastName = DEFAULT_LAST_NAME;
+        phone = DEFAULT_TELEPOHNE;
+        photoUrl = "";
+        isLogin = false;
+        hash = "";
+        userId =  "";
+        rating = 0;
+        email = "";
+    }
+}

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Pupil</string>
+    <string name="new_lesson">Создать занятие</string>
+    <string name="my_lessons">Мои занятия</string>
+    <string name="instructors">Инструкторы</string>
+    <string name="chat_list">Чаты занятий</string>
 </resources>
