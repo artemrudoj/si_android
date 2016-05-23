@@ -30,6 +30,14 @@ public class BaseUser {
 
     protected SharedPreferences preferences;
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
     @SerializedName("id") private String userId;
 
     @SerializedName("first_name") private String firstName;
@@ -53,7 +61,7 @@ public class BaseUser {
     }
 
     public boolean isLogin() {
-        return isLogin;
+        return hash != null && !hash.equals("");
     }
 
 

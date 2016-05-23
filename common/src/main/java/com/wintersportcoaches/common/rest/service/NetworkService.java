@@ -1,5 +1,7 @@
 package com.wintersportcoaches.common.rest.service;
 
+import com.wintersportcoaches.common.Chat;
+import com.wintersportcoaches.common.rest.LoginResponseSerializer;
 import com.wintersportcoaches.common.user.BaseUser;
 
 import java.util.List;
@@ -15,12 +17,14 @@ import retrofit2.http.POST;
 public interface NetworkService {
     @FormUrlEncoded
     @POST("/api/user/login/")
-    Call<String> user_login(@Field("phone") String phone,
-                            @Field("password") String password);
+    Call<LoginResponseSerializer> user_login(@Field("phone") String phone,
+                                             @Field("password") String password);
 
 
     @POST("/api/user/users_get/")
     Call<List<BaseUser>> users_get();
 
-
+    @FormUrlEncoded
+    @POST("/api/chat/get_my_list/")
+    Call<List<Chat>> chats_get(@Field("hash") String hash);
 }

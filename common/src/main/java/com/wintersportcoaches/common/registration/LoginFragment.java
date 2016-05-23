@@ -123,6 +123,11 @@ public class LoginFragment extends BaseFragment implements LoginView {
     }
 
     @Override
+    public void finish() {
+        getActivity().finish();
+    }
+
+    @Override
     public void onPause() {
         super.onPause();
         presenter.unbindView();

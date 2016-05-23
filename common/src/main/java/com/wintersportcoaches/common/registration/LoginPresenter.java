@@ -2,6 +2,7 @@ package com.wintersportcoaches.common.registration;
 
 import android.support.annotation.NonNull;
 
+import com.wintersportcoaches.common.rest.LoginResponseSerializer;
 import com.wintersportcoaches.common.rest.handleerror.CommonErrorHandleRetofitCallback;
 import com.wintersportcoaches.common.rest.service.NetworkService;
 import com.wintersportcoaches.common.base.presenter.BasePresenter;
@@ -40,23 +41,26 @@ public class LoginPresenter extends BasePresenter<BaseUser, LoginView> {
         if(loginView != null) {
             if (loginView.validatePhoneNumber() && loginView.validatePhoneNumber()) {
                 mNetworkService.user_login(UIUtils.getPhoneNumberFromFormattedNumber(loginView.getPhoneNumber()), loginView.getPassword())
-                        .enqueue(new CommonErrorHandleRetofitCallback<String>() {
+                        .enqueue(new CommonErrorHandleRetofitCallback<LoginResponseSerializer>() {
 
                             @Override
-                            public void onFailure(Call<String> call, Throwable t) {
+                            public void onFailure(Call<LoginResponseSerializer> call, Throwable t) {
                                 super.onFailure(call, t);
                                 mIsLoadingData = false;
                             }
 
                             @Override
-                            public void onResponse(Call<String> call, Response<String> response) {
+                            public void onResponse(Call<LoginResponseSerializer> call, Response<LoginResponseSerializer> response) {
                                 super.onResponse(call, response);
                                 mIsLoadingData = false;
                             }
 
                             @Override
-                            protected void success(Call<String> call, Response<String> response) {
-                                model.setHash(response.body());
+                            protected void success(Call<LoginResponseSerializer> call, Response<LoginResponseSerializer> response) {
+                                model.setHash(response.body().getHash());
+                                model.setUserId(response.body().getId());
+                                model.saveUser(view().getContext());
+                                view().finish();
                             }
                         });
                 mIsLoadingData = true;
