@@ -15,7 +15,7 @@ public interface CoachesView {
 
     void showEmpty();
 
-    String getHash();
+    void stopLoading();
 
 
 }

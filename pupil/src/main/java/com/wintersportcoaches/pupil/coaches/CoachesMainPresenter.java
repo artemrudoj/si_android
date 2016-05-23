@@ -54,12 +54,14 @@ public class CoachesMainPresenter extends BasePresenter<List<BaseUser>, CoachesV
             public void onFailure(Call<List<BaseUser>> call, Throwable t) {
                 super.onFailure(call, t);
                 isLoadingData = false;
+                view().stopLoading();
             }
 
             @Override
             public void onResponse(Call<List<BaseUser>> call, Response<List<BaseUser>> response) {
                 super.onResponse(call, response);
                 isLoadingData = false;
+                view().stopLoading();
             }
 
             @Override

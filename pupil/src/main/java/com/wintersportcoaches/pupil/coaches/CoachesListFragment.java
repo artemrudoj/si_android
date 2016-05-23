@@ -14,6 +14,7 @@ import com.wintersportcoaches.common.base.BaseFragment;
 import com.wintersportcoaches.common.base.UserActivity;
 import com.wintersportcoaches.common.base.presenter.PresenterManager;
 import com.wintersportcoaches.common.rest.service.NetworkServiceFactory;
+import com.wintersportcoaches.common.ui.FragmentProgressBarHelper;
 import com.wintersportcoaches.common.user.BaseUser;
 import com.wintersportcoaches.pupil.R;
 
@@ -30,6 +31,8 @@ public class CoachesListFragment extends BaseFragment implements CoachesView {
 
     private CoachesMainPresenter presenter;
     private CoachesRecyclerViewAdapter adapter;
+    FragmentProgressBarHelper fragmentProgressBarHelper;
+    RecyclerView mRecyclerView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,27 +45,27 @@ public class CoachesListFragment extends BaseFragment implements CoachesView {
 
         View view =  inflater.inflate(R.layout.fragment_coaches_list, container, false);
         setUpRecyclerView(view);
+        fragmentProgressBarHelper = new FragmentProgressBarHelper(mRecyclerView,
+                getActivity(), (ViewGroup) view);
+
 
         return view;
     }
 
     private void setUpRecyclerView(View containerView) {
-        Activity activity = getActivity();
-        if(activity != null) {
-            RecyclerView mRecyclerView = (RecyclerView)containerView.findViewById(R.id.coaches_rv);
-            adapter = new CoachesRecyclerViewAdapter(
-                            new CoachesRecyclerViewAdapter.IClickListener() {
-                                @Override
-                                public void onClick(int position) {
+        mRecyclerView = (RecyclerView)containerView.findViewById(R.id.coaches_rv);
+        adapter = new CoachesRecyclerViewAdapter(
+                        new CoachesRecyclerViewAdapter.IClickListener() {
+                            @Override
+                            public void onClick(int position) {
 //                                    Fragment fragment = TechnologyViewPagerFragment.newInstance(position);
 //                                    TechnologiesListFragment.this.getActivity().getSupportFragmentManager().beginTransaction().
 //                                            replace(R.id.tech_container_fl,fragment).addToBackStack(null).commit();
-                                }
-                            });
-            mRecyclerView.setAdapter(adapter);
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-            mRecyclerView.setHasFixedSize(true);
-        }
+                            }
+                        });
+        mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.setHasFixedSize(true);
     }
 
     @Override
@@ -93,7 +96,7 @@ public class CoachesListFragment extends BaseFragment implements CoachesView {
 
     @Override
     public void showLoading() {
-
+        fragmentProgressBarHelper.beginAnimation();
     }
 
     @Override
@@ -102,12 +105,7 @@ public class CoachesListFragment extends BaseFragment implements CoachesView {
     }
 
     @Override
-    public String getHash() {
-        UserActivity userActivity = (UserActivity) getActivity();
-        if(userActivity != null) {
-            return userActivity.getUser().getHash();
-        } else {
-            return null;
-        }
+    public void stopLoading() {
+        fragmentProgressBarHelper.endAnimation();
     }
 }
