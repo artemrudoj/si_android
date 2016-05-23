@@ -28,6 +28,11 @@ public class CoachesMainPresenter extends BasePresenter<List<BaseUser>, CoachesV
     @Override
     protected void updateView() {
 
+        if (model.size() == 0) {
+            view().showEmpty();
+        } else {
+            view().showCoaches(model);
+        }
     }
 
 

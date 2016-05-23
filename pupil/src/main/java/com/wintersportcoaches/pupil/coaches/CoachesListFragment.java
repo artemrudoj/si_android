@@ -49,7 +49,6 @@ public class CoachesListFragment extends BaseFragment implements CoachesView {
     private void setUpRecyclerView(View containerView) {
         Activity activity = getActivity();
         if(activity != null) {
-            List<BaseUser> list = null;
             RecyclerView mRecyclerView = (RecyclerView)containerView.findViewById(R.id.coaches_rv);
             adapter = new CoachesRecyclerViewAdapter(
                             new CoachesRecyclerViewAdapter.IClickListener() {
