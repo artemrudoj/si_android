@@ -16,44 +16,43 @@ import java.util.List;
  * Created by artem on 22.05.16.
  */
 public class CoachesRecyclerViewAdapter extends  RecyclerView.Adapter<CoachesViewHolder> {
-    private final LayoutInflater mInflater;
-    Context mContext;
-    List<BaseUser> technologyList;
+
+    List<BaseUser> coaches;
     IClickListener clickListener;
 
 
+    public CoachesRecyclerViewAdapter( IClickListener clickListener) {
 
-    public CoachesRecyclerViewAdapter(LayoutInflater inflater, Context context, List<BaseUser> technologies, IClickListener clickListener) {
-        this.mInflater = inflater;
-        this.mContext = context;
-        this.technologyList = technologies;
         this.clickListener = clickListener;
     }
 
     @Override
     public CoachesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (mInflater != null) {
-            return new CoachesViewHolder((CardView)mInflater.inflate(R.layout.intructor_list_row, parent, false), clickListener);
-        }
-        else {
-            throw new RuntimeException("Oooops, looks like activity is dead");
-        }
+        return new CoachesViewHolder((CardView)LayoutInflater.from(parent.getContext()).inflate(R.layout.intructor_list_row, parent, false), clickListener);
     }
 
     @Override
     public void onBindViewHolder(CoachesViewHolder holder, int position) {
-        if(technologyList != null) {
-            holder.setItem(technologyList.get(position));
+        if(coaches != null) {
+            holder.setItem(coaches.get(position));
             holder.setPosition(position);
         }
     }
 
     @Override
     public int getItemCount() {
-        if(technologyList != null) {
-            return technologyList.size();
+        if(coaches != null) {
+            return coaches.size();
         }
         return 0;
+    }
+
+    public void clearAndAddAll(List<BaseUser> coaches) {
+        coaches.clear();
+        for(BaseUser user : coaches) {
+            coaches.add(user);
+        }
+        notifyDataSetChanged();
     }
 
     public  interface IClickListener {

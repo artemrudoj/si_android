@@ -106,4 +106,8 @@ public class BaseUser {
         rating = 0;
         email = "";
     }
+
+    public void setHash(String hash) {
+        this.hash = hash;
+    }
 }

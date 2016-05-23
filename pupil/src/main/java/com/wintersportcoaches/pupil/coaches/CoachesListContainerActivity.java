@@ -13,5 +13,8 @@ public class CoachesListContainerActivity extends NavigationDrawerPupilActivity 
         super.onCreate(savedInstanceState);
         setToolbar(R.string.instructors);
         addHomeProfileButton();
+        if(savedInstanceState == null) {
+            getFragmentManager().beginTransaction().add(R.id.container, new CoachesListFragment()).commit();
+        }
     }
 }

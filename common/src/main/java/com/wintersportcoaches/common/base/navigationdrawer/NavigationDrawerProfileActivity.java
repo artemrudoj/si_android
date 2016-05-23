@@ -15,6 +15,7 @@ import android.widget.ListView;
 
 import com.artem.common.R;
 import com.wintersportcoaches.common.base.ToolbarActivity;
+import com.wintersportcoaches.common.base.UserActivity;
 import com.wintersportcoaches.common.registration.LoginActivity;
 import com.wintersportcoaches.common.ui.views.NavigarionDrawerHeaderView;
 
@@ -22,7 +23,7 @@ import com.wintersportcoaches.common.ui.views.NavigarionDrawerHeaderView;
 /**
  * Created by artem on 22.05.16.
  */
-public abstract class NavigationDrawerProfileActivity  extends ToolbarActivity implements AdapterView.OnItemClickListener {
+public abstract class NavigationDrawerProfileActivity  extends UserActivity implements AdapterView.OnItemClickListener {
 
     DrawerLayout drawer;
     ListView recordsListView;

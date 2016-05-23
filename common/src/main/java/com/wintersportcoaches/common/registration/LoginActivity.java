@@ -5,9 +5,10 @@ import android.os.Bundle;
 
 import com.artem.common.R;
 import com.wintersportcoaches.common.base.BackButtonActivity;
+import com.wintersportcoaches.common.base.UserActivity;
 
 
-public class LoginActivity extends BackButtonActivity {
+public class LoginActivity extends UserActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
