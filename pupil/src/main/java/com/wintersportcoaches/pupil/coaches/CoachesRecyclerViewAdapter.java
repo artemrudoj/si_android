@@ -10,6 +10,7 @@ import com.wintersportcoaches.common.user.BaseUser;
 import com.wintersportcoaches.pupil.R;
 import com.wintersportcoaches.pupil.user.PupilUser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ import java.util.List;
  */
 public class CoachesRecyclerViewAdapter extends  RecyclerView.Adapter<CoachesViewHolder> {
 
-    List<BaseUser> coaches;
+    List<BaseUser> coaches = new ArrayList<>();
     IClickListener clickListener;
 
 
@@ -33,23 +34,19 @@ public class CoachesRecyclerViewAdapter extends  RecyclerView.Adapter<CoachesVie
 
     @Override
     public void onBindViewHolder(CoachesViewHolder holder, int position) {
-        if(coaches != null) {
-            holder.setItem(coaches.get(position));
-            holder.setPosition(position);
-        }
+        holder.setItem(coaches.get(position));
+        holder.setPosition(position);
+
     }
 
     @Override
     public int getItemCount() {
-        if(coaches != null) {
-            return coaches.size();
-        }
-        return 0;
+        return coaches.size();
     }
 
-    public void clearAndAddAll(List<BaseUser> coaches) {
+    public void clearAndAddAll(List<BaseUser> newcoaches) {
         coaches.clear();
-        for(BaseUser user : coaches) {
+        for(BaseUser user : newcoaches) {
             coaches.add(user);
         }
         notifyDataSetChanged();

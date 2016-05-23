@@ -39,6 +39,8 @@ public class CoachesViewHolder  extends RecyclerView.ViewHolder {
 
     public void setItem(BaseUser item) {
         this.item = item;
+        mFirstName.setText(item.getFirstName());
+        mSecondName.setText(item.getLastName());
     }
 
     public void setPosition(int position) {

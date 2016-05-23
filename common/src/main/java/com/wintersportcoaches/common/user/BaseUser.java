@@ -2,6 +2,7 @@ package com.wintersportcoaches.common.user;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.widget.TextView;
 
 import com.artem.common.R;
 import com.google.gson.annotations.SerializedName;
@@ -109,5 +110,13 @@ public class BaseUser {
 
     public void setHash(String hash) {
         this.hash = hash;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 }
