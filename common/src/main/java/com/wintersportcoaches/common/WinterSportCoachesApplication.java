@@ -10,6 +10,8 @@ import com.wintersportcoaches.common.user.BaseUser;
 public class WinterSportCoachesApplication extends android.app.Application {
     protected BaseUser user;
 
+
+
     public BaseUser getUser() {
         return user;
     }

@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="grey_500">#9E9E9E</color>
+    <color name="indigo_100">#C5CAE9</color>
+    <color name="deep_purple">#D1C4E9</color>
 </resources>

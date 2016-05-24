@@ -1,6 +1,7 @@
 package com.wintersportcoaches.common.rest.service;
 
 import com.wintersportcoaches.common.Chat;
+import com.wintersportcoaches.common.model.Message;
 import com.wintersportcoaches.common.rest.LoginResponseSerializer;
 import com.wintersportcoaches.common.user.BaseUser;
 
@@ -27,4 +28,16 @@ public interface NetworkService {
     @FormUrlEncoded
     @POST("/api/chat/get_my_list/")
     Call<List<Chat>> chats_get(@Field("hash") String hash);
+
+
+
+    @FormUrlEncoded
+    @POST("/api/chat/get_chat_history/")
+    Call<List<Message>> get_chat_history(@Field("hash") String hash, @Field("id") String id);
+
+
+
+    @FormUrlEncoded
+    @POST("/api/chat/send_message/")
+    Call<Object> send_message(@Field("hash") String hash, @Field("text") String text, @Field("chat") String chatId);
 }

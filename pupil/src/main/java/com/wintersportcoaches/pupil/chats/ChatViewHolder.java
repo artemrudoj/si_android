@@ -31,7 +31,7 @@ public class ChatViewHolder extends RecyclerView.ViewHolder {
 
     public void setItem(Chat item) {
         this.item = item;
-        chatName.setText(item.name);
+        chatName.setText(item.getName());
     }
 
     public void setPosition(int position) {
