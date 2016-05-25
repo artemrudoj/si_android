@@ -23,7 +23,7 @@ public class BaseUser {
     private static final String TELEPHONE_ARG = "telephone";
     private static final String PHOTO_BACKEND_ARG = "PHOTO_BACKEND_ARG";
     private static final String LOGIN_ARG = "login";
-    private static final String HASH_ARG = "hash";
+    public static final String HASH_ARG = "hash";
     private static final String ID_ARGS = "id";
     private static final String RATING_ARG = "rating";
     private static final String EMAIL_ARG = "EMAIL_ARG";
