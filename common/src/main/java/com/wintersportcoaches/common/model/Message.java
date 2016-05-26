@@ -1,5 +1,8 @@
 package com.wintersportcoaches.common.model;
 
+import android.content.Intent;
+import android.os.Bundle;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -39,11 +42,11 @@ public class Message {
         if(extras == null) {
             throw new IllegalArgumentException("can not found extras in intent");
         }
-        id = extras.getString(EXTRA_ID);
+        id = extras.getInt(EXTRA_ID);
         creationTime = extras.getString(EXTRA_CREATION_TIME);
         text = extras.getString(EXTRA_TEXT);
-        senderId = extras.getString(EXTRA_SENDER);
-        chatId = extras.getString(EXTRA_CHAT);
+        senderId = extras.getInt(EXTRA_SENDER);
+        chatId = extras.getInt(EXTRA_CHAT);
     }
 
     public int getId() {
