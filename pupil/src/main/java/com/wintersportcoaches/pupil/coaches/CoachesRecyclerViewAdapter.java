@@ -34,6 +34,7 @@ public class CoachesRecyclerViewAdapter extends  RecyclerView.Adapter<CoachesVie
 
     @Override
     public void onBindViewHolder(CoachesViewHolder holder, int position) {
+
         holder.setItem(coaches.get(position));
         holder.setPosition(position);
 

@@ -27,7 +27,7 @@ public class MessagesListFragment extends BaseFragment implements MessagesView {
 
 
     private static final String ARG_CHAT_ID = "MessagesListFragment.ARG_CHAT_ID";
-    private String mChatId;
+    private int mChatId;
 
     private MessagesPresenter presenter;
     private MessagesRecyclerViewAdapter adapter;
@@ -43,10 +43,10 @@ public class MessagesListFragment extends BaseFragment implements MessagesView {
     }
 
 
-    public static MessagesListFragment newInstance(String chatId) {
+    public static MessagesListFragment newInstance(int chatId) {
         MessagesListFragment fragment = new MessagesListFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_CHAT_ID, chatId);
+        args.putInt(ARG_CHAT_ID, chatId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -55,7 +55,7 @@ public class MessagesListFragment extends BaseFragment implements MessagesView {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mChatId = getArguments().getString(ARG_CHAT_ID);
+            mChatId = getArguments().getInt(ARG_CHAT_ID);
         }
     }
 
