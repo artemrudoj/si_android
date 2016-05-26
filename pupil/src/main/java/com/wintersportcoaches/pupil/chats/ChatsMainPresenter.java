@@ -26,6 +26,11 @@ public class ChatsMainPresenter  extends BasePresenter<List<Chat>, ChatsListFrag
 
     @Override
     protected void updateView() {
+        if (model.size() == 0) {
+            view().showEmpty();
+        } else {
+            view().showChats(model);
+        }
     }
 
 
@@ -47,12 +52,14 @@ public class ChatsMainPresenter  extends BasePresenter<List<Chat>, ChatsListFrag
             public void onFailure(Call<List<Chat>> call, Throwable t) {
                 super.onFailure(call, t);
                 isLoadingData = false;
+                view().stopLoading();
             }
 
             @Override
             public void onResponse(Call<List<Chat>> call, Response<List<Chat>> response) {
                 super.onResponse(call, response);
                 isLoadingData = false;
+                view().stopLoading();
             }
 
             @Override
