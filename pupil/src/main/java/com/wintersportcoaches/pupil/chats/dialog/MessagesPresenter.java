@@ -140,7 +140,8 @@ public class MessagesPresenter extends BasePresenter<List<Message>,MessagesView>
             protected void success(Call<List<Message>> call, Response<List<Message>> response) {
                 super.success(call, response);
                 model = response.body();
-                view().showMessages(model);
+                if(view() != null)
+                    view().showMessages(model);
             }
         });
     }

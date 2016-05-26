@@ -14,7 +14,7 @@ public interface LoginView {
     void goToForgotPasswordActivity();
     void showLoading();
 
-    void finish();
+    void successLogin();
 
     Context getContext();
 }

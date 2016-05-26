@@ -60,7 +60,7 @@ public class LoginPresenter extends BasePresenter<BaseUser, LoginView> {
                                 model.setHash(response.body().getHash());
                                 model.setUserId(response.body().getId());
                                 model.saveUser(view().getContext());
-                                view().finish();
+                                if(view() != null) view().successLogin();
                             }
                         });
                 mIsLoadingData = true;

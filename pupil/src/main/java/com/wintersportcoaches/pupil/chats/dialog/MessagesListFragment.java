@@ -42,7 +42,6 @@ public class MessagesListFragment extends BindedServiceFragment implements Messa
     RecyclerView mRecyclerView;
 
     private EditText inputEditText;
-    private Button sendMessageBtn;
 
 
     public MessagesListFragment() {

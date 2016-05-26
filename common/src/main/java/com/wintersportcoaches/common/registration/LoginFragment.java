@@ -17,6 +17,7 @@ import com.wintersportcoaches.common.base.BaseFragment;
 import com.wintersportcoaches.common.base.UserActivity;
 import com.wintersportcoaches.common.rest.service.NetworkServiceFactory;
 import com.wintersportcoaches.common.base.presenter.PresenterManager;
+import com.wintersportcoaches.common.service.SocketListenerService;
 import com.wintersportcoaches.common.ui.PhoneTextWatcher;
 import com.wintersportcoaches.common.utils.Utils;
 import com.wintersportcoaches.common.utils.ValidationUtils;
@@ -123,7 +124,8 @@ public class LoginFragment extends BaseFragment implements LoginView {
     }
 
     @Override
-    public void finish() {
+    public void successLogin() {
+        SocketListenerService.start(getActivity());
         getActivity().finish();
     }
 

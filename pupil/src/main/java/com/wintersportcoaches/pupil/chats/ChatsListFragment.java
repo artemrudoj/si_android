@@ -62,7 +62,7 @@ public class ChatsListFragment  extends BindedServiceFragment {
                         public void onClick(int position) {
                             Fragment fragment = MessagesListFragment.newInstance(position);
                             FragmentTransaction fragmentTransaction = ChatsListFragment.this.getActivity().getFragmentManager().beginTransaction();
-                            fragmentTransaction.replace(R.id.container,fragment);
+                            fragmentTransaction.replace(R.id.container, fragment);
                             fragmentTransaction.addToBackStack(null);
                             fragmentTransaction.commit();
                         }
