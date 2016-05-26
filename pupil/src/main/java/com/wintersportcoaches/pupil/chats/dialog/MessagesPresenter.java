@@ -20,13 +20,13 @@ import retrofit2.Response;
 public class MessagesPresenter extends BasePresenter<List<Message>,MessagesView> {
 
     private BaseUser mUser;
-    private String mChatId;
+    private int mChatId;
     NetworkService mNetworkService;
 
     private boolean isLoadingData = false;
 
 
-    public MessagesPresenter(String mChatId, NetworkService mNetworkService, BaseUser mUser) {
+    public MessagesPresenter(int mChatId, NetworkService mNetworkService, BaseUser mUser) {
         this.mChatId = mChatId;
         this.mNetworkService = mNetworkService;
         this.mUser = mUser;
@@ -70,7 +70,7 @@ public class MessagesPresenter extends BasePresenter<List<Message>,MessagesView>
 
 
     @Override
-    public void bindView(@NonNull MessagesView view) {
+    public void bindView(MessagesView view) {
         super.bindView(view);
 
         // Let's not reload data if it's already here

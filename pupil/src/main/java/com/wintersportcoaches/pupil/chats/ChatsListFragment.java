@@ -1,6 +1,8 @@
 package com.wintersportcoaches.pupil.chats;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +20,7 @@ import com.wintersportcoaches.common.rest.service.NetworkServiceFactory;
 import com.wintersportcoaches.common.service.BindedServiceFragment;
 import com.wintersportcoaches.common.user.BaseUser;
 import com.wintersportcoaches.pupil.R;
+import com.wintersportcoaches.pupil.chats.dialog.MessagesListFragment;
 
 import java.util.List;
 
@@ -56,9 +59,11 @@ public class ChatsListFragment  extends BindedServiceFragment {
                     new ChatsRecyclerViewAdapter.IClickListener() {
                         @Override
                         public void onClick(int position) {
-//                                    Fragment fragment = TechnologyViewPagerFragment.newInstance(position);
-//                                    TechnologiesListFragment.this.getActivity().getSupportFragmentManager().beginTransaction().
-//                                            replace(R.id.tech_container_fl,fragment).addToBackStack(null).commit();
+                            Fragment fragment = MessagesListFragment.newInstance(position);
+                            FragmentTransaction fragmentTransaction = ChatsListFragment.this.getActivity().getFragmentManager().beginTransaction();
+                            fragmentTransaction.replace(R.id.container,fragment);
+                            fragmentTransaction.addToBackStack(null);
+                            fragmentTransaction.commit();
                         }
                     });
             mRecyclerView.setAdapter(adapter);

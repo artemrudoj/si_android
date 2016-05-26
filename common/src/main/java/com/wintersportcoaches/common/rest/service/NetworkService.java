@@ -33,11 +33,11 @@ public interface NetworkService {
 
     @FormUrlEncoded
     @POST("/api/chat/get_chat_history/")
-    Call<List<Message>> get_chat_history(@Field("hash") String hash, @Field("id") String id);
+    Call<List<Message>> get_chat_history(@Field("hash") String hash, @Field("id") int id);
 
 
 
     @FormUrlEncoded
     @POST("/api/chat/send_message/")
-    Call<Object> send_message(@Field("hash") String hash, @Field("text") String text, @Field("chat") String chatId);
+    Call<Object> send_message(@Field("hash") String hash, @Field("text") String text, @Field("chat") int chatId);
 }
