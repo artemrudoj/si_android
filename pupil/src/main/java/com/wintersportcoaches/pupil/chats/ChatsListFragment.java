@@ -18,6 +18,7 @@ import com.wintersportcoaches.common.base.presenter.PresenterManager;
 import com.wintersportcoaches.common.model.Message;
 import com.wintersportcoaches.common.rest.service.NetworkServiceFactory;
 import com.wintersportcoaches.common.service.BindedServiceFragment;
+import com.wintersportcoaches.common.ui.FragmentProgressBarHelper;
 import com.wintersportcoaches.common.user.BaseUser;
 import com.wintersportcoaches.pupil.R;
 import com.wintersportcoaches.pupil.chats.dialog.MessagesListFragment;
@@ -31,7 +32,8 @@ public class ChatsListFragment  extends BindedServiceFragment {
         // Required empty public constructor
     }
 
-
+    RecyclerView mRecyclerView;
+    FragmentProgressBarHelper fragmentProgressBarHelper;
     private ChatsMainPresenter presenter;
     private ChatsRecyclerViewAdapter adapter;
 
@@ -44,8 +46,10 @@ public class ChatsListFragment  extends BindedServiceFragment {
             presenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
         }
 
-        View view =  inflater.inflate(R.layout.fragment_coaches_list, container, false);
+        View view =  inflater.inflate(R.layout.fragment_chats_list, container, false);
         setUpRecyclerView(view);
+        fragmentProgressBarHelper = new FragmentProgressBarHelper(mRecyclerView,
+                getActivity(), (ViewGroup) view);
 
         return view;
     }
@@ -53,8 +57,7 @@ public class ChatsListFragment  extends BindedServiceFragment {
     private void setUpRecyclerView(View containerView) {
         Activity activity = getActivity();
         if(activity != null) {
-            List<BaseUser> list = null;
-            RecyclerView mRecyclerView = (RecyclerView)containerView.findViewById(R.id.coaches_rv);
+            mRecyclerView = (RecyclerView)containerView.findViewById(R.id.chats_rv);
             adapter = new ChatsRecyclerViewAdapter(
                     new ChatsRecyclerViewAdapter.IClickListener() {
                         @Override
@@ -75,7 +78,6 @@ public class ChatsListFragment  extends BindedServiceFragment {
     @Override
     public void onResume() {
         super.onResume();
-
         presenter.bindView(this);
     }
 
@@ -98,11 +100,15 @@ public class ChatsListFragment  extends BindedServiceFragment {
     }
 
     public void showLoading() {
-
+        fragmentProgressBarHelper.beginAnimation();
     }
 
     public void showEmpty() {
 
+    }
+
+    public void stopLoading() {
+        fragmentProgressBarHelper.endAnimation();
     }
 
     public String getHash() {

@@ -1,9 +1,11 @@
 package com.wintersportcoaches.common.service;
 
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -11,7 +13,9 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.artem.common.R;
 import com.wintersportcoaches.common.base.BaseFragment;
 import com.wintersportcoaches.common.base.UserActivity;
 import com.wintersportcoaches.common.model.Message;
@@ -24,6 +28,38 @@ import java.lang.ref.WeakReference;
  */
 public abstract class BindedServiceFragment extends BaseFragment  {
     private LocalServiceConnection mLocalServiceConnection;
+    private BroadcastReceiver mReceiver;
+
+
+
+    void registerBroadcastReceiver() {
+        mReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                onMessage(new Message(intent));
+            }
+        };
+        IntentFilter intentFilter = new IntentFilter(
+                getString(R.string.message_intent));
+        getActivity().registerReceiver(mReceiver, intentFilter);
+    }
+
+    void unregisterBrodcastReceiver() {
+        getActivity().unregisterReceiver(mReceiver);
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        registerBroadcastReceiver();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        unregisterBrodcastReceiver();
+    }
 
     @Override
     public void onCreate(Bundle savedInstance) {
@@ -44,23 +80,23 @@ public abstract class BindedServiceFragment extends BaseFragment  {
         mLocalServiceConnection = new LocalServiceConnection(getActivity());
     }
 
-
-    private static class ServiceListener implements MessageListener
-            {
-        private WeakReference<BindedServiceFragment> mWeakService;
-        public ServiceListener(BindedServiceFragment fragment) {
-            this.mWeakService =
-                    new WeakReference<BindedServiceFragment>(fragment);
-        }
-        @Override
-        public void onMessage(Message msg) {
-            BindedServiceFragment localReferenceFragment =
-                    mWeakService.get();
-            if (localReferenceFragment != null) {
-                localReferenceFragment.onMessage(msg);
-            }
-        }
-    }
+//
+//    private static class ServiceListener implements MessageListener
+//            {
+//        private WeakReference<BindedServiceFragment> mWeakService;
+//        public ServiceListener(BindedServiceFragment fragment) {
+//            this.mWeakService =
+//                    new WeakReference<BindedServiceFragment>(fragment);
+//        }
+//        @Override
+//        public void onMessage(Message msg) {
+//            BindedServiceFragment localReferenceFragment =
+//                    mWeakService.get();
+//            if (localReferenceFragment != null) {
+//                localReferenceFragment.onMessage(msg);
+//            }
+//        }
+//    }
 
     protected abstract void onMessage(Message msg);
 
@@ -79,7 +115,7 @@ public abstract class BindedServiceFragment extends BaseFragment  {
             mBoundLocalService = ((SocketListenerService.ServiceBinder) iBinder)
                     .getService();
             mIsBound = true;
-            mBoundLocalService.addListener(new ServiceListener(BindedServiceFragment.this));
+            //mBoundLocalService.addListener(new ServiceListener(BindedServiceFragment.this));
         }
 
         @Override

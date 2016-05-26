@@ -7,12 +7,44 @@ import com.google.gson.annotations.SerializedName;
  */
 public class Message {
 
+
+    private final static String EXTRA_ID = "Message.EXTRA_ID";
+    private final static String EXTRA_CREATION_TIME = "Message.EXTRA_CREATION_TIME";
+    private final static String EXTRA_TEXT = "Message.EXTRA_TEXT";
+    private final static String EXTRA_SENDER = "Message.EXTRA_SENDER";
+    private final static String EXTRA_CHAT = "Message.EXTRA_CHAT";
     @SerializedName("id") int id;
     @SerializedName("creation_time") String  creationTime;
     @SerializedName("text") String text;
     @SerializedName("sender") int senderId;
     @SerializedName("chat") int chatId;
 
+    public Message() {
+
+    }
+
+
+    public Intent insertToIntent() {
+        Intent intent = new Intent();
+        intent.putExtra(EXTRA_ID,id);
+        intent.putExtra(EXTRA_CREATION_TIME,creationTime);
+        intent.putExtra(EXTRA_TEXT,text);
+        intent.putExtra(EXTRA_SENDER,senderId);
+        intent.putExtra(EXTRA_CHAT,chatId);
+        return intent;
+    }
+
+    public Message(Intent intent) {
+        Bundle extras = intent.getExtras();
+        if(extras == null) {
+            throw new IllegalArgumentException("can not found extras in intent");
+        }
+        id = extras.getString(EXTRA_ID);
+        creationTime = extras.getString(EXTRA_CREATION_TIME);
+        text = extras.getString(EXTRA_TEXT);
+        senderId = extras.getString(EXTRA_SENDER);
+        chatId = extras.getString(EXTRA_CHAT);
+    }
 
     public int getId() {
         return id;
