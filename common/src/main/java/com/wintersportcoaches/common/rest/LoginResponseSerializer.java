@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  */
 public class LoginResponseSerializer {
     @SerializedName("hash") private String hash;
-    @SerializedName("id") private String id;
+    @SerializedName("id") private int id;
 
     public String getHash() {
         return hash;
@@ -17,11 +17,11 @@ public class LoginResponseSerializer {
         this.hash = hash;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 }

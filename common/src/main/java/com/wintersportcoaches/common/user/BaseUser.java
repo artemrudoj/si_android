@@ -30,15 +30,15 @@ public class BaseUser {
 
     protected SharedPreferences preferences;
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
-    @SerializedName("id") private String userId;
+    @SerializedName("id") private int userId;
 
     @SerializedName("first_name") private String firstName;
 
@@ -74,7 +74,7 @@ public class BaseUser {
         photoUrl = preferences.getString(PHOTO_BACKEND_ARG, "");
         isLogin = preferences.getBoolean(LOGIN_ARG, false);
         hash = preferences.getString(HASH_ARG, "");
-        userId = preferences.getString(ID_ARGS, "");
+        userId = preferences.getInt(ID_ARGS, 0);
         rating = preferences.getFloat(RATING_ARG, 0);
         email = preferences.getString(EMAIL_ARG, "");
     }
@@ -89,7 +89,7 @@ public class BaseUser {
         editor.putString(TELEPHONE_ARG, phone);
         editor.putString(PHOTO_BACKEND_ARG, photoUrl);
         editor.putString(HASH_ARG, hash);
-        editor.putString(ID_ARGS, userId);
+        editor.putInt(ID_ARGS, userId);
         editor.putString(EMAIL_ARG, email);
         editor.putFloat(RATING_ARG, rating);
         editor.apply();
@@ -111,7 +111,7 @@ public class BaseUser {
         photoUrl = "";
         isLogin = false;
         hash = "";
-        userId =  "";
+        userId =  0;
         rating = 0;
         email = "";
     }

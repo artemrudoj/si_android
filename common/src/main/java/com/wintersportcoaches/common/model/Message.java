@@ -7,18 +7,18 @@ import com.google.gson.annotations.SerializedName;
  */
 public class Message {
 
-    @SerializedName("id") String id;
+    @SerializedName("id") int id;
     @SerializedName("creation_time") String  creationTime;
     @SerializedName("text") String text;
-    @SerializedName("sender") String senderId;
-    @SerializedName("chat") String chatId;
+    @SerializedName("sender") int senderId;
+    @SerializedName("chat") int chatId;
 
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -38,19 +38,19 @@ public class Message {
         this.text = text;
     }
 
-    public String getSenderId() {
+    public int getSenderId() {
         return senderId;
     }
 
-    public void setSenderId(String senderId) {
+    public void setSenderId(int senderId) {
         this.senderId = senderId;
     }
 
-    public String getChatId() {
+    public int getChatId() {
         return chatId;
     }
 
-    public void setChatId(String chatId) {
+    public void setChatId(int chatId) {
         this.chatId = chatId;
     }
 }

@@ -48,7 +48,11 @@ public class MessagesPresenter extends BasePresenter<List<Message>,MessagesView>
             @Override
             protected void success(Call<Object> call, Response<Object> response) {
                 super.success(call, response);
-                view().appendOneMessage(message, mUser.getUserId());
+                Message msg = new Message();
+                msg.setChatId(mChatId);
+                msg.setText(message);
+                msg.setSenderId(mUser.getUserId());
+                view().appendOneMessage(msg);
             }
 
             @Override
@@ -65,7 +69,7 @@ public class MessagesPresenter extends BasePresenter<List<Message>,MessagesView>
     }
 
     void receiveMessage(Message message) {
-        view().appendOneMessage(message.getText(), message.getSenderId());
+        view().appendOneMessage(message);
     }
 
 

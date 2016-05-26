@@ -1,6 +1,7 @@
 package com.wintersportcoaches.pupil.chats.dialog;
 
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -35,6 +37,7 @@ public class MessagesListFragment extends BaseFragment implements MessagesView {
     RecyclerView mRecyclerView;
 
     private EditText inputEditText;
+    private Button sendMessageBtn;
 
 
 
@@ -78,6 +81,15 @@ public class MessagesListFragment extends BaseFragment implements MessagesView {
 
     private void initViews(View view) {
         inputEditText = (EditText)view.findViewById(R.id.new_message_et);
+        sendMessageBtn = (Button)view.findViewById(R.id.send_message_btn);
+        sendMessageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String textToSend = inputEditText.getText().toString();
+                inputEditText.setText("");
+                presenter.sendMessage(textToSend);
+            }
+        });
     }
 
     private void setUpRecyclerView(View view) {
@@ -86,6 +98,7 @@ public class MessagesListFragment extends BaseFragment implements MessagesView {
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setHasFixedSize(true);
+
     }
 
 
@@ -129,8 +142,8 @@ public class MessagesListFragment extends BaseFragment implements MessagesView {
         inputEditText.setText("");
     }
 
-    @Override
-    public void appendOneMessage(String message, String id) {
+    public void appendOneMessage(Message msg) {
+        adapter.appendOneMessage(msg);
 
     }
 }
