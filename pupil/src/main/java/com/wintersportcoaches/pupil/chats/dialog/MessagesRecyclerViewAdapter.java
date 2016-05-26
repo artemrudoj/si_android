@@ -44,4 +44,9 @@ public class MessagesRecyclerViewAdapter extends  RecyclerView.Adapter<MessagesV
         }
         notifyDataSetChanged();
     }
+
+    public void addOneMessage(Message message) {
+        mMessages.add(message);
+        notifyDataSetChanged();
+    }
 }

@@ -9,6 +9,7 @@ import com.wintersportcoaches.common.rest.service.NetworkService;
 import com.wintersportcoaches.common.user.BaseUser;
 import com.wintersportcoaches.pupil.coaches.CoachesView;
 
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -48,7 +49,8 @@ public class MessagesPresenter extends BasePresenter<List<Message>,MessagesView>
             @Override
             protected void success(Call<Object> call, Response<Object> response) {
                 super.success(call, response);
-                view().appendOneMessage(message, mUser.getUserId());
+
+                view().appendOneMessage(new Message(message));
             }
 
             @Override
@@ -65,7 +67,7 @@ public class MessagesPresenter extends BasePresenter<List<Message>,MessagesView>
     }
 
     void receiveMessage(Message message) {
-        view().appendOneMessage(message.getText(), message.getSenderId());
+        view().appendOneMessage(message);
     }
 
 
