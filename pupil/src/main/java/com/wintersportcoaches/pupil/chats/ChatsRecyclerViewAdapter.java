@@ -4,6 +4,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import com.wintersportcoaches.common.base.recylverviewedfragment.BaseRecyclerViewAdapter;
 
 import com.wintersportcoaches.common.Chat;
 import com.wintersportcoaches.common.user.BaseUser;
@@ -16,9 +17,8 @@ import java.util.List;
 /**
  * Created by alexeykhatskevich on 24.05.16.
  */
-public class ChatsRecyclerViewAdapter  extends  RecyclerView.Adapter<ChatViewHolder> {
+public class ChatsRecyclerViewAdapter  extends  BaseRecyclerViewAdapter<ChatViewHolder, Chat> {
 
-    List<Chat> chats = new ArrayList<>();
     IClickListener clickListener;
 
 
@@ -34,27 +34,14 @@ public class ChatsRecyclerViewAdapter  extends  RecyclerView.Adapter<ChatViewHol
 
     @Override
     public void onBindViewHolder(ChatViewHolder holder, int position) {
-        if(chats != null) {
-            holder.setItem(chats.get(position));
+        if(data != null) {
+            holder.setItem(data.get(position));
             holder.setPosition(position);
         }
     }
 
-    @Override
-    public int getItemCount() {
-        if(chats != null) {
-            return chats.size();
-        }
-        return 0;
-    }
 
-    public void clearAndAddAll(List<Chat> chats) {
-        this.chats.clear();
-        for(Chat chat : chats) {
-            this.chats.add(chat);
-        }
-        notifyDataSetChanged();
-    }
+
 
     public  interface IClickListener {
         void onClick(int position);

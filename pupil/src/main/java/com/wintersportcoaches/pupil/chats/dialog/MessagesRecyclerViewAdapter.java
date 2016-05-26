@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.wintersportcoaches.common.base.recylverviewedfragment.BaseRecyclerViewAdapter;
 import com.wintersportcoaches.common.model.Message;
 import com.wintersportcoaches.common.user.BaseUser;
 import com.wintersportcoaches.pupil.R;
@@ -18,8 +19,7 @@ import java.util.List;
 /**
  * Created by artem on 24.05.16.
  */
-public class MessagesRecyclerViewAdapter extends  RecyclerView.Adapter<MessagesViewHolder>  {
-    List<Message> mMessages = new  ArrayList<>();
+public class MessagesRecyclerViewAdapter extends BaseRecyclerViewAdapter<MessagesViewHolder, Message> {
     BaseUser baseUser;
 
     public MessagesRecyclerViewAdapter(BaseUser baseUser) {
@@ -32,7 +32,7 @@ public class MessagesRecyclerViewAdapter extends  RecyclerView.Adapter<MessagesV
 
     @Override
     public int getItemViewType(int position) {
-        return baseUser.getUserId() == mMessages.get(position).getSenderId() ?
+        return baseUser.getUserId() == ((List<Message>)data).get(position).getSenderId() ?
                 TYPE_MY_MESSAGE : TYPE_OTHER_MESSAGE;
     }
 
@@ -66,25 +66,14 @@ public class MessagesRecyclerViewAdapter extends  RecyclerView.Adapter<MessagesV
 
     @Override
     public void onBindViewHolder(MessagesViewHolder holder, int position) {
-        holder.mMessageTextView.setText(mMessages.get(position).getText());
+        holder.mMessageTextView.setText(data.get(position).getText());
         initTextViewForViewType(holder.getItemViewType(), holder.mMessageTextView);
     }
 
-    @Override
-    public int getItemCount() {
-        return mMessages.size();
-    }
 
-    public void clearAndAddAll(List<Message> newMessages) {
-        mMessages.clear();
-        for(Message message : newMessages) {
-            mMessages.add(message);
-        }
-        notifyDataSetChanged();
-    }
 
     public void addOneMessage(Message message) {
-        mMessages.add(message);
+        data.add(message);
         notifyDataSetChanged();
     }
 }

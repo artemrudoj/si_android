@@ -14,16 +14,19 @@ import android.widget.Toast;
 import com.wintersportcoaches.common.Chat;
 import com.wintersportcoaches.common.base.UserActivity;
 import com.wintersportcoaches.common.base.presenter.PresenterManager;
+import com.wintersportcoaches.common.base.presenter.PresenteredFragment;
+import com.wintersportcoaches.common.base.recylverviewedfragment.RecyclerViewedFragment;
 import com.wintersportcoaches.common.model.Message;
 import com.wintersportcoaches.common.rest.service.NetworkServiceFactory;
 import com.wintersportcoaches.common.service.BindedServiceFragment;
+import com.wintersportcoaches.common.service.SocketListenerService;
 import com.wintersportcoaches.common.ui.FragmentProgressBarHelper;
 import com.wintersportcoaches.pupil.R;
 import com.wintersportcoaches.pupil.chats.dialog.MessagesListFragment;
 
 import java.util.List;
 
-public class ChatsListFragment  extends BindedServiceFragment {
+public class ChatsListFragment  extends RecyclerViewedFragment {
 
 
     public ChatsListFragment() {
@@ -31,9 +34,6 @@ public class ChatsListFragment  extends BindedServiceFragment {
     }
 
     RecyclerView mRecyclerView;
-    FragmentProgressBarHelper fragmentProgressBarHelper;
-    private ChatsMainPresenter presenter;
-    private ChatsRecyclerViewAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,7 +46,7 @@ public class ChatsListFragment  extends BindedServiceFragment {
 
         View view =  inflater.inflate(R.layout.fragment_chats_list, container, false);
         setUpRecyclerView(view);
-        fragmentProgressBarHelper = new FragmentProgressBarHelper(mRecyclerView,
+        mFragmentProgressBarHelper = new FragmentProgressBarHelper(mRecyclerView,
                 getActivity(), (ViewGroup) view);
 
         return view;
@@ -56,7 +56,7 @@ public class ChatsListFragment  extends BindedServiceFragment {
         Activity activity = getActivity();
         if(activity != null) {
             mRecyclerView = (RecyclerView)containerView.findViewById(R.id.chats_rv);
-            adapter = new ChatsRecyclerViewAdapter(
+            mAdapter = new ChatsRecyclerViewAdapter(
                     new ChatsRecyclerViewAdapter.IClickListener() {
                         @Override
                         public void onClick(int position) {
@@ -67,47 +67,13 @@ public class ChatsListFragment  extends BindedServiceFragment {
                             fragmentTransaction.commit();
                         }
                     });
-            mRecyclerView.setAdapter(adapter);
+            mRecyclerView.setAdapter(mAdapter);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             mRecyclerView.setHasFixedSize(true);
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        presenter.bindView(this);
-    }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-
-        presenter.unbindView();
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        PresenterManager.getInstance().savePresenter(presenter, outState);
-    }
-
-    public void showChats(List<Chat> chats) {
-        adapter.clearAndAddAll(chats);
-    }
-
-    public void showLoading() {
-        fragmentProgressBarHelper.beginAnimation();
-    }
-
-    public void showEmpty() {
-
-    }
-
-    public void stopLoading() {
-        fragmentProgressBarHelper.endAnimation();
-    }
 
     public String getHash() {
         UserActivity userActivity = (UserActivity) getActivity();

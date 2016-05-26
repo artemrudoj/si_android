@@ -18,6 +18,8 @@ import com.wintersportcoaches.common.base.BaseFragment;
 import com.wintersportcoaches.common.base.ToolbarActivity;
 import com.wintersportcoaches.common.base.UserActivity;
 import com.wintersportcoaches.common.base.presenter.PresenterManager;
+import com.wintersportcoaches.common.base.presenter.PresenteredFragment;
+import com.wintersportcoaches.common.base.recylverviewedfragment.RecyclerViewedFragment;
 import com.wintersportcoaches.common.model.Message;
 import com.wintersportcoaches.common.rest.service.NetworkServiceFactory;
 import com.wintersportcoaches.common.service.BindedServiceFragment;
@@ -28,7 +30,7 @@ import com.wintersportcoaches.pupil.coaches.CoachesRecyclerViewAdapter;
 
 import java.util.List;
 
-public class MessagesListFragment extends BindedServiceFragment implements MessagesView {
+public class MessagesListFragment extends RecyclerViewedFragment implements MessagesView {
 
 
     private static final String ARG_CHAT_ID = "MessagesListFragment.ARG_CHAT_ID";
@@ -36,9 +38,8 @@ public class MessagesListFragment extends BindedServiceFragment implements Messa
     private int mChatId;
     private int mOpponentId;
 
-    private MessagesPresenter presenter;
-    private MessagesRecyclerViewAdapter adapter;
-    FragmentProgressBarHelper mFragmentProgressBarHelper;
+
+
     RecyclerView mRecyclerView;
 
     private EditText inputEditText;
@@ -76,7 +77,7 @@ public class MessagesListFragment extends BindedServiceFragment implements Messa
 
     @Override
     protected void onMessage(Message msg) {
-        presenter.receiveMessage(msg);
+        ((MessagesPresenter)presenter).receiveMessage(msg);
     }
 
     @Override
@@ -108,7 +109,7 @@ public class MessagesListFragment extends BindedServiceFragment implements Messa
                 if(sendedMessage.equals("")) {
                     Toast.makeText(getActivity(), "Сообщение не может быть пустым", Toast.LENGTH_LONG).show();
                 } else {
-                    presenter.sendMessage(sendedMessage);
+                    ((MessagesPresenter)presenter).sendMessage(sendedMessage);
                 }
             }
         });
@@ -116,8 +117,8 @@ public class MessagesListFragment extends BindedServiceFragment implements Messa
 
     private void setUpRecyclerView(View view) {
         mRecyclerView = (RecyclerView)view.findViewById(R.id.messages_rv);
-        adapter = new MessagesRecyclerViewAdapter(((UserActivity)getActivity()).getUser());
-        mRecyclerView.setAdapter(adapter);
+        mAdapter = new MessagesRecyclerViewAdapter(((UserActivity)getActivity()).getUser());
+        mRecyclerView.setAdapter(mAdapter);
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setStackFromEnd(true);
         mRecyclerView.setLayoutManager(linearLayoutManager);
@@ -127,55 +128,13 @@ public class MessagesListFragment extends BindedServiceFragment implements Messa
 
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        PresenterManager.getInstance().savePresenter(presenter, outState);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        presenter.bindView(this);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-
-        presenter.unbindView();
-    }
-
-
-    @Override
-    public void showMessages(List<Message> messages) {
-        adapter.clearAndAddAll(messages);
-    }
-
-    @Override
-    public void showLoading() {
-        mFragmentProgressBarHelper.beginAnimation();
-    }
-
-    @Override
-    public void showEmpty() {
-
-    }
-
-    @Override
-    public void stopLoading() {
-        mFragmentProgressBarHelper.endAnimation();
-    }
-
-    @Override
     public void clearInputArea() {
         inputEditText.setText("");
     }
 
     @Override
     public void appendOneMessage(Message message) {
-        adapter.addOneMessage(message);
-        mRecyclerView.scrollToPosition(adapter.getItemCount()-1);
+        ((MessagesRecyclerViewAdapter)mAdapter).addOneMessage(message);
+        mRecyclerView.scrollToPosition(mAdapter.getItemCount()-1);
     }
 }

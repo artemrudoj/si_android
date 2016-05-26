@@ -3,9 +3,12 @@ package com.wintersportcoaches.pupil.coaches;
 import android.support.annotation.NonNull;
 
 import com.wintersportcoaches.common.base.presenter.BasePresenter;
+import com.wintersportcoaches.common.base.recylverviewedfragment.BaseRecycledViewPresenter;
+import com.wintersportcoaches.common.model.Message;
 import com.wintersportcoaches.common.rest.handleerror.CommonErrorHandleRetofitCallback;
 import com.wintersportcoaches.common.rest.service.NetworkService;
 import com.wintersportcoaches.common.user.BaseUser;
+import com.wintersportcoaches.pupil.chats.dialog.MessagesView;
 
 import java.util.List;
 
@@ -15,8 +18,8 @@ import retrofit2.Response;
 /**
  * Created by artem on 23.05.16.
  */
-public class CoachesMainPresenter extends BasePresenter<List<BaseUser>, CoachesView> {
-    private boolean isLoadingData = false;
+public class CoachesMainPresenter extends BaseRecycledViewPresenter<List<BaseUser>,CoachesView> {
+
 
 
     NetworkService mNetworkService;
@@ -26,51 +29,8 @@ public class CoachesMainPresenter extends BasePresenter<List<BaseUser>, CoachesV
     }
 
     @Override
-    protected void updateView() {
-
-        if (model.size() == 0) {
-            view().showEmpty();
-        } else {
-            view().showCoaches(model);
-        }
-    }
-
-
-    @Override
-    public void bindView(@NonNull CoachesView view) {
-        super.bindView(view);
-
-        // Let's not reload data if it's already here
-        if (model == null && !isLoadingData) {
-            view().showLoading();
-            loadData();
-        }
-    }
-
-    private void loadData() {
-        isLoadingData = true;
-        mNetworkService.users_get().enqueue(new CommonErrorHandleRetofitCallback<List<BaseUser>>() {
-            @Override
-            public void onFailure(Call<List<BaseUser>> call, Throwable t) {
-                super.onFailure(call, t);
-                isLoadingData = false;
-                view().stopLoading();
-            }
-
-            @Override
-            public void onResponse(Call<List<BaseUser>> call, Response<List<BaseUser>> response) {
-                super.onResponse(call, response);
-                isLoadingData = false;
-                view().stopLoading();
-            }
-
-            @Override
-            protected void success(Call<List<BaseUser>> call, Response<List<BaseUser>> response) {
-                super.success(call, response);
-                model = response.body();
-                view().showCoaches(model);
-            }
-        });
+    protected void loadData() {
+        mNetworkService.users_get().enqueue(mLoadDataCallback);
     }
 
 }

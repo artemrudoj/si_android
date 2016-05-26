@@ -1,32 +1,28 @@
 package com.wintersportcoaches.pupil.chats.dialog;
 
-import android.support.annotation.NonNull;
+
 
 import com.wintersportcoaches.common.Chat;
-import com.wintersportcoaches.common.base.presenter.BasePresenter;
 import com.wintersportcoaches.common.model.Message;
 import com.wintersportcoaches.common.rest.handleerror.CommonErrorHandleRetofitCallback;
 import com.wintersportcoaches.common.rest.service.NetworkService;
 import com.wintersportcoaches.common.user.BaseUser;
-import com.wintersportcoaches.pupil.coaches.CoachesView;
-
-import java.util.Collections;
 import java.util.List;
-
+import com.wintersportcoaches.common.base.recylverviewedfragment.BaseRecycledViewPresenter;
 import retrofit2.Call;
 import retrofit2.Response;
 
 /**
  * Created by artem on 24.05.16.
  */
-public class MessagesPresenter extends BasePresenter<List<Message>,MessagesView> {
+public class MessagesPresenter extends BaseRecycledViewPresenter<List<Message>,MessagesView> {
 
     private final int mOpponentId;
     private BaseUser mUser;
     private int mChatId;
     NetworkService mNetworkService;
 
-    private boolean isLoadingData = false;
+
 
 
     public MessagesPresenter(int mChatId, int mOpponentId,NetworkService mNetworkService, BaseUser mUser) {
@@ -36,14 +32,6 @@ public class MessagesPresenter extends BasePresenter<List<Message>,MessagesView>
         this.mUser = mUser;
     }
 
-    @Override
-    protected void updateView() {
-        if (model.size() == 0) {
-            view().showEmpty();
-        } else {
-            view().showMessages(model);
-        }
-    }
 
     void sendMessage(final String message) {
         if(message == null || message.equals(""))
@@ -58,16 +46,6 @@ public class MessagesPresenter extends BasePresenter<List<Message>,MessagesView>
                 msg.setSenderId(mUser.getUserId());
                 view().appendOneMessage(msg);
             }
-
-            @Override
-            public void onFailure(Call<Object> call, Throwable t) {
-                super.onFailure(call, t);
-            }
-
-            @Override
-            public void onResponse(Call<Object> call, Response<Object> response) {
-                super.onResponse(call, response);
-            }
         });
         view().clearInputArea();
     }
@@ -77,31 +55,10 @@ public class MessagesPresenter extends BasePresenter<List<Message>,MessagesView>
     }
 
 
-    @Override
-    public void bindView(MessagesView view) {
-        super.bindView(view);
 
-        // Let's not reload data if it's already here
-        if (model == null && !isLoadingData) {
-            view().showLoading();
-            loadData();
-        }
-    }
 
     private void getChatIdAndMessages(){
         mNetworkService.get_chat_with_user(mUser.getHash(), mOpponentId).enqueue(new CommonErrorHandleRetofitCallback<Chat>() {
-            @Override
-            public void onFailure(Call<Chat> call, Throwable t) {
-                super.onFailure(call, t);
-                view().stopLoading();
-            }
-
-            @Override
-            public void onResponse(Call<Chat> call, Response<Chat> response) {
-                super.onResponse(call, response);
-                view().stopLoading();
-            }
-
             @Override
             protected void success(Call<Chat> call, Response<Chat> response) {
                 super.success(call, response);
@@ -111,7 +68,8 @@ public class MessagesPresenter extends BasePresenter<List<Message>,MessagesView>
         });
     }
 
-    private void loadData() {
+    @Override
+    protected void loadData() {
         if (mChatId != 0) {
             loadMessages();
         }else {
@@ -120,29 +78,6 @@ public class MessagesPresenter extends BasePresenter<List<Message>,MessagesView>
     }
 
     private void loadMessages() {
-        isLoadingData = true;
-        mNetworkService.get_chat_history(mUser.getHash(), mChatId).enqueue(new CommonErrorHandleRetofitCallback<List<Message>>() {
-            @Override
-            public void onFailure(Call<List<Message>> call, Throwable t) {
-                super.onFailure(call, t);
-                isLoadingData = false;
-                view().stopLoading();
-            }
-
-            @Override
-            public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
-                super.onResponse(call, response);
-                isLoadingData = false;
-                view().stopLoading();
-            }
-
-            @Override
-            protected void success(Call<List<Message>> call, Response<List<Message>> response) {
-                super.success(call, response);
-                model = response.body();
-                if(view() != null)
-                    view().showMessages(model);
-            }
-        });
+        mNetworkService.get_chat_history(mUser.getHash(), mChatId).enqueue(mLoadDataCallback);
     }
 }

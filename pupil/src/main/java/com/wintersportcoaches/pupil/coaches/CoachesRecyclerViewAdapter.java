@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.wintersportcoaches.common.ActivityHolder;
+import com.wintersportcoaches.common.base.recylverviewedfragment.BaseRecyclerViewAdapter;
 import com.wintersportcoaches.common.user.BaseUser;
 import com.wintersportcoaches.pupil.R;
 import com.wintersportcoaches.pupil.user.PupilUser;
@@ -17,9 +18,9 @@ import java.util.List;
 /**
  * Created by artem on 22.05.16.
  */
-public class CoachesRecyclerViewAdapter extends  RecyclerView.Adapter<CoachesViewHolder> {
+public class CoachesRecyclerViewAdapter extends BaseRecyclerViewAdapter<CoachesViewHolder,BaseUser> {
 
-    List<BaseUser> coaches = new ArrayList<>();
+
     ActivityHolder activityHolder;
 
 
@@ -35,23 +36,11 @@ public class CoachesRecyclerViewAdapter extends  RecyclerView.Adapter<CoachesVie
     @Override
     public void onBindViewHolder(CoachesViewHolder holder, int position) {
 
-        holder.setItem(coaches.get(position));
+        holder.setItem(data.get(position));
         holder.setPosition(position);
 
     }
 
-    @Override
-    public int getItemCount() {
-        return coaches.size();
-    }
-
-    public void clearAndAddAll(List<BaseUser> newcoaches) {
-        coaches.clear();
-        for(BaseUser user : newcoaches) {
-            coaches.add(user);
-        }
-        notifyDataSetChanged();
-    }
 
     public  interface IClickListener {
         void onClick(int position);
