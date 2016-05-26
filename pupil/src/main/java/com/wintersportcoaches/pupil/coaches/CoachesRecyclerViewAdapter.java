@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import com.wintersportcoaches.common.ActivityHolder;
 import com.wintersportcoaches.common.user.BaseUser;
 import com.wintersportcoaches.pupil.R;
 import com.wintersportcoaches.pupil.user.PupilUser;

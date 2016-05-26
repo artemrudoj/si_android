@@ -12,14 +12,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.wintersportcoaches.common.Chat;
-import com.wintersportcoaches.common.base.BaseFragment;
 import com.wintersportcoaches.common.base.UserActivity;
 import com.wintersportcoaches.common.base.presenter.PresenterManager;
 import com.wintersportcoaches.common.model.Message;
 import com.wintersportcoaches.common.rest.service.NetworkServiceFactory;
 import com.wintersportcoaches.common.service.BindedServiceFragment;
 import com.wintersportcoaches.common.ui.FragmentProgressBarHelper;
-import com.wintersportcoaches.common.user.BaseUser;
 import com.wintersportcoaches.pupil.R;
 import com.wintersportcoaches.pupil.chats.dialog.MessagesListFragment;
 

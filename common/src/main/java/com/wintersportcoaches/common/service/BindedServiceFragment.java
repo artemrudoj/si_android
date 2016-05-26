@@ -66,29 +66,10 @@ public abstract class BindedServiceFragment extends BaseFragment  {
     public void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
         SocketListenerService.start(getActivity());
-
     }
 
 
 
-
-//
-//    private static class ServiceListener implements MessageListener
-//            {
-//        private WeakReference<BindedServiceFragment> mWeakService;
-//        public ServiceListener(BindedServiceFragment fragment) {
-//            this.mWeakService =
-//                    new WeakReference<BindedServiceFragment>(fragment);
-//        }
-//        @Override
-//        public void onMessage(Message msg) {
-//            BindedServiceFragment localReferenceFragment =
-//                    mWeakService.get();
-//            if (localReferenceFragment != null) {
-//                localReferenceFragment.onMessage(msg);
-//            }
-//        }
-//    }
 
     protected abstract void onMessage(Message msg);
 
