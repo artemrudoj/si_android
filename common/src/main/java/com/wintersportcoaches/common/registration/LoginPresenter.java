@@ -7,7 +7,7 @@ import com.wintersportcoaches.common.rest.handleerror.CommonErrorHandleRetofitCa
 import com.wintersportcoaches.common.rest.service.NetworkService;
 import com.wintersportcoaches.common.base.presenter.BasePresenter;
 import com.wintersportcoaches.common.user.BaseUser;
-import com.wintersportcoaches.common.utils.UIUtils;
+import com.wintersportcoaches.common.utils.Utils;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -40,7 +40,7 @@ public class LoginPresenter extends BasePresenter<BaseUser, LoginView> {
         LoginView loginView = view();
         if(loginView != null) {
             if (loginView.validatePhoneNumber() && loginView.validatePhoneNumber()) {
-                mNetworkService.user_login(UIUtils.getPhoneNumberFromFormattedNumber(loginView.getPhoneNumber()), loginView.getPassword())
+                mNetworkService.user_login(Utils.getPhoneNumberFromFormattedNumber(loginView.getPhoneNumber()), loginView.getPassword())
                         .enqueue(new CommonErrorHandleRetofitCallback<LoginResponseSerializer>() {
 
                             @Override

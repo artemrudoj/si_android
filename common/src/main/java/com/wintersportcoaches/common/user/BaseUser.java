@@ -100,7 +100,7 @@ public class BaseUser {
         preferences = context.getSharedPreferences(appName, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.clear();
-        editor.commit();
+        editor.apply();
         clearProperties();
     }
 

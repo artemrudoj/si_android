@@ -8,6 +8,7 @@ import com.wintersportcoaches.common.base.navigationdrawer.NavigationDrawerListB
 import com.wintersportcoaches.common.base.navigationdrawer.NavigationDrawerProfileActivity;
 import com.wintersportcoaches.common.base.navigationdrawer.NavigationItem;
 import com.wintersportcoaches.common.base.navigationdrawer.TapHandler;
+import com.wintersportcoaches.common.service.SocketListenerService;
 import com.wintersportcoaches.pupil.chats.ChatsContainerActivity;
 import com.wintersportcoaches.pupil.coaches.CoachesListContainerActivity;
 import com.wintersportcoaches.pupil.createlesson.CreateLessonActivity;
@@ -55,7 +56,8 @@ public class NavigationDrawerPupilActivity extends NavigationDrawerProfileActivi
         items.add(new NavigationItem(R.drawable.vector_log_out_icon, R.string.log_out, false, false, new TapHandler() {
             @Override
             public void onTap() {
-                //startActivity(new Intent(NavigationDrawerPupilActivity.this, HistoryLessonActivity.class));
+                getUser().exit(getApplicationContext());
+                SocketListenerService.stop(getApplicationContext());
             }
         }));
 
