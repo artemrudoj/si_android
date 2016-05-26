@@ -4,6 +4,7 @@
     <string name="close">close</string>
     <string name="log_out">Выйти</string>
     <string name="history_list">История</string>
+    <string name="message_intent">com.wintersportcoaches.MESSAGE_RECIEVER</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

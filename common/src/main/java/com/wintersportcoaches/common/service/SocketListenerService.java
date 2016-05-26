@@ -8,6 +8,7 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.JsonReader;
 
+import com.artem.common.R;
 import com.google.gson.Gson;
 import com.google.gson.JsonStreamParser;
 import com.wintersportcoaches.common.model.Message;
@@ -29,7 +30,6 @@ public class SocketListenerService extends Service {
 
     Socket mSocket;
     Thread socketHandler;
-    private Handler mUiHandler = new Handler();;
     private static final int PORT = 43455;
     private static final String HOST = "ec2-54-93-219-101.eu-central-1.compute.amazonaws.com";
     private String hash;
@@ -57,9 +57,6 @@ public class SocketListenerService extends Service {
     }
 
 
-    public void addListener(MessageListener listener) {
-        listeners.add(listener);
-    }
 
 
     public class ServiceBinder extends Binder {
@@ -101,14 +98,9 @@ public class SocketListenerService extends Service {
     }
 
     public void notifyListeners(final Message msg) {
-        for(final MessageListener listener : listeners ) {
-            mUiHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    listener.onMessage(msg);
-                }
-            });
-        }
+        Intent intent = msg.insertToIntent();
+        intent.setAction(getString(R.string.message_intent));
+        sendBroadcast(intent);
     }
 
 
@@ -143,7 +135,8 @@ public class SocketListenerService extends Service {
                 in = mSocket.getInputStream();
                 out = mSocket.getOutputStream();
                 //reg into chat
-                out.write(Protocol.encodeInitString(hash).getBytes(Charset.forName("UTF-8")));
+                String registrationString = Protocol.encodeInitString(hash);
+                out.write(registrationString.getBytes(Charset.forName("UTF-8")));
             } catch (IOException e) {
                 e.printStackTrace();
             }

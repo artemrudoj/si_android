@@ -10,13 +10,13 @@ import java.util.List;
  */
 public interface MessagesView  {
 
-        void showMessages(List<Message> messages);
+    void showMessages(List<Message> messages);
 
-        void showLoading();
+    void showLoading();
 
-        void showEmpty();
+    void showEmpty();
 
-        void stopLoading();
+    void stopLoading();
 
     void clearInputArea();
 
