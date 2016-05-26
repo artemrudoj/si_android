@@ -2,6 +2,7 @@ package com.wintersportcoaches.pupil.chats.dialog;
 
 import android.support.annotation.NonNull;
 
+import com.wintersportcoaches.common.Chat;
 import com.wintersportcoaches.common.base.presenter.BasePresenter;
 import com.wintersportcoaches.common.model.Message;
 import com.wintersportcoaches.common.rest.handleerror.CommonErrorHandleRetofitCallback;
@@ -20,6 +21,7 @@ import retrofit2.Response;
  */
 public class MessagesPresenter extends BasePresenter<List<Message>,MessagesView> {
 
+    private final int mOpponentId;
     private BaseUser mUser;
     private int mChatId;
     NetworkService mNetworkService;
@@ -27,8 +29,9 @@ public class MessagesPresenter extends BasePresenter<List<Message>,MessagesView>
     private boolean isLoadingData = false;
 
 
-    public MessagesPresenter(int mChatId, NetworkService mNetworkService, BaseUser mUser) {
+    public MessagesPresenter(int mChatId, int mOpponentId,NetworkService mNetworkService, BaseUser mUser) {
         this.mChatId = mChatId;
+        this.mOpponentId = mOpponentId;
         this.mNetworkService = mNetworkService;
         this.mUser = mUser;
     }
@@ -85,7 +88,38 @@ public class MessagesPresenter extends BasePresenter<List<Message>,MessagesView>
         }
     }
 
+    private void getChatIdAndMessages(){
+        mNetworkService.get_chat_with_user(mUser.getHash(), mOpponentId).enqueue(new CommonErrorHandleRetofitCallback<Chat>() {
+            @Override
+            public void onFailure(Call<Chat> call, Throwable t) {
+                super.onFailure(call, t);
+                view().stopLoading();
+            }
+
+            @Override
+            public void onResponse(Call<Chat> call, Response<Chat> response) {
+                super.onResponse(call, response);
+                view().stopLoading();
+            }
+
+            @Override
+            protected void success(Call<Chat> call, Response<Chat> response) {
+                super.success(call, response);
+                mChatId = response.body().getId();
+                loadData();
+            }
+        });
+    }
+
     private void loadData() {
+        if (mChatId != 0) {
+            loadMessages();
+        }else {
+            getChatIdAndMessages();
+        }
+    }
+
+    private void loadMessages() {
         isLoadingData = true;
         mNetworkService.get_chat_history(mUser.getHash(), mChatId).enqueue(new CommonErrorHandleRetofitCallback<List<Message>>() {
             @Override

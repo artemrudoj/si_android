@@ -31,7 +31,9 @@ public class MessagesListFragment extends BindedServiceFragment implements Messa
 
 
     private static final String ARG_CHAT_ID = "MessagesListFragment.ARG_CHAT_ID";
+    private static final String ARG_OPPONENT_ID = "MessagesListFragment.ARG_OPPONENT_ID";
     private int mChatId;
+    private int mOpponentId;
 
     private MessagesPresenter presenter;
     private MessagesRecyclerViewAdapter adapter;
@@ -40,7 +42,6 @@ public class MessagesListFragment extends BindedServiceFragment implements Messa
 
     private EditText inputEditText;
     private Button sendMessageBtn;
-
 
 
     public MessagesListFragment() {
@@ -56,12 +57,21 @@ public class MessagesListFragment extends BindedServiceFragment implements Messa
         return fragment;
     }
 
+    public static MessagesListFragment newInstanceWithOpponentId(int opponentId) {
+        MessagesListFragment fragment = new MessagesListFragment();
+        Bundle args = new Bundle();
+        args.putInt(ARG_OPPONENT_ID, opponentId);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mChatId = getArguments().getInt(ARG_CHAT_ID);
-        }
+                mOpponentId = getArguments().getInt(ARG_OPPONENT_ID, 0);
+                mChatId = getArguments().getInt(ARG_CHAT_ID, 0);
+            }
     }
 
     @Override
@@ -73,7 +83,7 @@ public class MessagesListFragment extends BindedServiceFragment implements Messa
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (savedInstanceState == null) {
-            presenter = new MessagesPresenter(mChatId, NetworkServiceFactory.getNetworkService(),
+            presenter = new MessagesPresenter(mChatId, mOpponentId, NetworkServiceFactory.getNetworkService(),
                     ((UserActivity)getActivity()).getUser());
         } else {
             presenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);

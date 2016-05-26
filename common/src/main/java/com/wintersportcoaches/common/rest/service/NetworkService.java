@@ -29,11 +29,14 @@ public interface NetworkService {
     @POST("/api/chat/get_my_list/")
     Call<List<Chat>> chats_get(@Field("hash") String hash);
 
-
-
     @FormUrlEncoded
     @POST("/api/chat/get_chat_history/")
     Call<List<Message>> get_chat_history(@Field("hash") String hash, @Field("id") int id);
+
+
+    @FormUrlEncoded
+    @POST("/api/chat/get_with_user/")
+    Call<Chat> get_chat_with_user(@Field("hash") String hash, @Field("id") int id);
 
 
 

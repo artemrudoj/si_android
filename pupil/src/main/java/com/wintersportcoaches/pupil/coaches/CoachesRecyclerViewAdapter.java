@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import com.wintersportcoaches.common.ActivityHolder;
 import com.wintersportcoaches.common.user.BaseUser;
 import com.wintersportcoaches.pupil.R;
 import com.wintersportcoaches.pupil.user.PupilUser;
@@ -19,17 +20,16 @@ import java.util.List;
 public class CoachesRecyclerViewAdapter extends  RecyclerView.Adapter<CoachesViewHolder> {
 
     List<BaseUser> coaches = new ArrayList<>();
-    IClickListener clickListener;
+    ActivityHolder activityHolder;
 
 
-    public CoachesRecyclerViewAdapter( IClickListener clickListener) {
-
-        this.clickListener = clickListener;
+    public CoachesRecyclerViewAdapter( ActivityHolder activityHolder) {
+        this.activityHolder = activityHolder;
     }
 
     @Override
     public CoachesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new CoachesViewHolder((CardView)LayoutInflater.from(parent.getContext()).inflate(R.layout.intructor_list_row, parent, false), clickListener);
+        return new CoachesViewHolder((CardView)LayoutInflater.from(parent.getContext()).inflate(R.layout.intructor_list_row, parent, false), activityHolder);
     }
 
     @Override

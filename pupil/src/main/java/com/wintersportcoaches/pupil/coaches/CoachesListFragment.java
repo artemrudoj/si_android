@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.wintersportcoaches.common.ActivityHolder;
 import com.wintersportcoaches.common.base.BaseFragment;
 import com.wintersportcoaches.common.base.UserActivity;
 import com.wintersportcoaches.common.base.presenter.PresenterManager;
@@ -21,7 +22,7 @@ import com.wintersportcoaches.pupil.R;
 import java.util.List;
 
 
-public class CoachesListFragment extends BaseFragment implements CoachesView {
+public class CoachesListFragment extends BaseFragment implements CoachesView, ActivityHolder {
 
 
     public CoachesListFragment() {
@@ -54,15 +55,7 @@ public class CoachesListFragment extends BaseFragment implements CoachesView {
 
     private void setUpRecyclerView(View containerView) {
         mRecyclerView = (RecyclerView)containerView.findViewById(R.id.coaches_rv);
-        adapter = new CoachesRecyclerViewAdapter(
-                        new CoachesRecyclerViewAdapter.IClickListener() {
-                            @Override
-                            public void onClick(int position) {
-//                                    Fragment fragment = TechnologyViewPagerFragment.newInstance(position);
-//                                    TechnologiesListFragment.this.getActivity().getSupportFragmentManager().beginTransaction().
-//                                            replace(R.id.tech_container_fl,fragment).addToBackStack(null).commit();
-                            }
-                        });
+        adapter = new CoachesRecyclerViewAdapter(this);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setHasFixedSize(true);
@@ -107,5 +100,9 @@ public class CoachesListFragment extends BaseFragment implements CoachesView {
     @Override
     public void stopLoading() {
         fragmentProgressBarHelper.endAnimation();
+    }
+
+    public void performWithActivity(ActivityCaller activityCaller) {
+        activityCaller.perform(getActivity());
     }
 }
