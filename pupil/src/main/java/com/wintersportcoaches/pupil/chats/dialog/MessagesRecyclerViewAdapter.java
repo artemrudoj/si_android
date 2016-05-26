@@ -13,6 +13,9 @@ import com.wintersportcoaches.pupil.R;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by artem on 24.05.16.
+ */
 public class MessagesRecyclerViewAdapter extends  RecyclerView.Adapter<MessagesViewHolder>  {
     List<Message> mMessages = new  ArrayList<>();
     @Override
@@ -42,9 +45,8 @@ public class MessagesRecyclerViewAdapter extends  RecyclerView.Adapter<MessagesV
         notifyDataSetChanged();
     }
 
-    public void appendOneMessage( Message msg ) {
-        mMessages.add(msg);
+    public void addOneMessage(Message message) {
+        mMessages.add(message);
         notifyDataSetChanged();
     }
-
 }

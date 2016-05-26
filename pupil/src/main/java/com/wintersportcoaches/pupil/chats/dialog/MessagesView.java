@@ -20,5 +20,5 @@ public interface MessagesView  {
 
     void clearInputArea();
 
-    void appendOneMessage(Message msg);
+    void appendOneMessage(Message message);
 }

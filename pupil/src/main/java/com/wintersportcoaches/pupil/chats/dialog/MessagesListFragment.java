@@ -12,12 +12,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wintersportcoaches.common.base.BaseFragment;
 import com.wintersportcoaches.common.base.UserActivity;
 import com.wintersportcoaches.common.base.presenter.PresenterManager;
 import com.wintersportcoaches.common.model.Message;
 import com.wintersportcoaches.common.rest.service.NetworkServiceFactory;
+import com.wintersportcoaches.common.service.BindedServiceFragment;
 import com.wintersportcoaches.common.ui.FragmentProgressBarHelper;
 import com.wintersportcoaches.pupil.R;
 import com.wintersportcoaches.pupil.coaches.CoachesMainPresenter;
@@ -25,7 +27,7 @@ import com.wintersportcoaches.pupil.coaches.CoachesRecyclerViewAdapter;
 
 import java.util.List;
 
-public class MessagesListFragment extends BaseFragment implements MessagesView {
+public class MessagesListFragment extends BindedServiceFragment implements MessagesView {
 
 
     private static final String ARG_CHAT_ID = "MessagesListFragment.ARG_CHAT_ID";
@@ -63,6 +65,11 @@ public class MessagesListFragment extends BaseFragment implements MessagesView {
     }
 
     @Override
+    protected void onMessage(Message msg) {
+        presenter.receiveMessage(msg);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (savedInstanceState == null) {
@@ -81,13 +88,16 @@ public class MessagesListFragment extends BaseFragment implements MessagesView {
 
     private void initViews(View view) {
         inputEditText = (EditText)view.findViewById(R.id.new_message_et);
-        sendMessageBtn = (Button)view.findViewById(R.id.send_message_btn);
-        sendMessageBtn.setOnClickListener(new View.OnClickListener() {
+        Button sendMessageButton = (Button)view.findViewById(R.id.send_message_btn);
+        sendMessageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String textToSend = inputEditText.getText().toString();
-                inputEditText.setText("");
-                presenter.sendMessage(textToSend);
+                String sendedMessage = inputEditText.getText().toString();
+                if(sendedMessage.equals("")) {
+                    Toast.makeText(getActivity(), "Сообщение не может быть пустым", Toast.LENGTH_LONG).show();
+                } else {
+                    presenter.sendMessage(sendedMessage);
+                }
             }
         });
     }
@@ -96,11 +106,20 @@ public class MessagesListFragment extends BaseFragment implements MessagesView {
         mRecyclerView = (RecyclerView)view.findViewById(R.id.messages_rv);
         adapter = new MessagesRecyclerViewAdapter();
         mRecyclerView.setAdapter(adapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setStackFromEnd(true);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setHasFixedSize(true);
 
     }
 
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        PresenterManager.getInstance().savePresenter(presenter, outState);
+    }
 
     @Override
     public void onResume() {
@@ -142,8 +161,9 @@ public class MessagesListFragment extends BaseFragment implements MessagesView {
         inputEditText.setText("");
     }
 
-    public void appendOneMessage(Message msg) {
-        adapter.appendOneMessage(msg);
-
+    @Override
+    public void appendOneMessage(Message message) {
+        adapter.addOneMessage(message);
+        mRecyclerView.scrollToPosition(adapter.getItemCount()-1);
     }
 }

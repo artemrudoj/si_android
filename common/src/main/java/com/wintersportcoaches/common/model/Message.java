@@ -37,6 +37,10 @@ public class Message {
         return intent;
     }
 
+    public Message(String text) {
+        this.text = text;
+    }
+
     public Message(Intent intent) {
         Bundle extras = intent.getExtras();
         if(extras == null) {
