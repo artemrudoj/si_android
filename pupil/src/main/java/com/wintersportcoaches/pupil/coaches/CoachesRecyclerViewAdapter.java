@@ -22,6 +22,7 @@ public class CoachesRecyclerViewAdapter extends  RecyclerView.Adapter<CoachesVie
     IClickListener clickListener;
 
 
+
     public CoachesRecyclerViewAdapter( IClickListener clickListener) {
 
         this.clickListener = clickListener;
@@ -39,6 +40,8 @@ public class CoachesRecyclerViewAdapter extends  RecyclerView.Adapter<CoachesVie
         holder.setPosition(position);
 
     }
+
+
 
     @Override
     public int getItemCount() {

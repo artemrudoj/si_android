@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wintersportcoaches.common.base.BaseFragment;
+import com.wintersportcoaches.common.base.ToolbarActivity;
 import com.wintersportcoaches.common.base.UserActivity;
 import com.wintersportcoaches.common.base.presenter.PresenterManager;
 import com.wintersportcoaches.common.model.Message;
@@ -83,6 +84,8 @@ public class MessagesListFragment extends BindedServiceFragment implements Messa
         initViews(view);
         mFragmentProgressBarHelper = new FragmentProgressBarHelper(mRecyclerView,
                 getActivity(), (ViewGroup) view);
+
+        ((ToolbarActivity)getActivity()).setToolbar();
         return view;
     }
 
@@ -104,7 +107,7 @@ public class MessagesListFragment extends BindedServiceFragment implements Messa
 
     private void setUpRecyclerView(View view) {
         mRecyclerView = (RecyclerView)view.findViewById(R.id.messages_rv);
-        adapter = new MessagesRecyclerViewAdapter();
+        adapter = new MessagesRecyclerViewAdapter(((UserActivity)getActivity()).getUser());
         mRecyclerView.setAdapter(adapter);
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setStackFromEnd(true);
