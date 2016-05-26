@@ -1,6 +1,8 @@
 package com.wintersportcoaches.common.service;
 
+import android.app.Activity;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.Handler;
@@ -11,8 +13,10 @@ import android.util.JsonReader;
 import com.artem.common.R;
 import com.google.gson.Gson;
 import com.google.gson.JsonStreamParser;
+import com.wintersportcoaches.common.WinterSportCoachesApplication;
 import com.wintersportcoaches.common.model.Message;
 import com.wintersportcoaches.common.user.BaseUser;
+import com.wintersportcoaches.common.utils.Utils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,22 +36,10 @@ public class SocketListenerService extends Service {
     Thread socketHandler;
     private static final int PORT = 43455;
     private static final String HOST = "ec2-54-93-219-101.eu-central-1.compute.amazonaws.com";
-    private String hash;
     private boolean isConnectionEstablished = false;
-    private final ServiceBinder mBinder = new ServiceBinder();
-    private List<MessageListener> listeners = new ArrayList<>();
 
 
 
-
-
-    public String getHash() {
-        return hash;
-    }
-
-    public void setHash(String hash) {
-        this.hash = hash;
-    }
 
 
     @Override
@@ -56,14 +48,26 @@ public class SocketListenerService extends Service {
         stopListening();
     }
 
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
 
-
-
-    public class ServiceBinder extends Binder {
-        public SocketListenerService getService() {
-            return SocketListenerService.this;
+    public static void start(Context context) {
+        if (!Utils.isMyServiceRunning(SocketListenerService.class, context)) {
+            Intent intent = new Intent(context, SocketListenerService.class);
+            context.startService(intent);
         }
     }
+
+    public static void stop(Context context) {
+        if (Utils.isMyServiceRunning(SocketListenerService.class, context)) {
+            Intent intent = new Intent(context, SocketListenerService.class);
+            context.stopService(intent);
+        }
+    }
+
 
     void establishConnectionWithServer() {
         socketHandler = new Thread(new SocketConnectionHandler());
@@ -82,17 +86,15 @@ public class SocketListenerService extends Service {
         }
     }
 
-    boolean isCorrectHash() {
+    boolean isCorrectHash(String hash) {
         return hash != null && !hash.equals("");
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if(intent != null) {
-            hash = intent.getExtras().getString(BaseUser.HASH_ARG);
-            if(isCorrectHash() && !isConnectionEstablished) {
-                establishConnectionWithServer();
-            }
+        String hash = ((WinterSportCoachesApplication)getApplication()).getUser().getHash();
+        if(isCorrectHash(hash) && !isConnectionEstablished) {
+            establishConnectionWithServer();
         }
         return START_STICKY;
     }
@@ -101,19 +103,6 @@ public class SocketListenerService extends Service {
         Intent intent = msg.insertToIntent();
         intent.setAction(getString(R.string.message_intent));
         sendBroadcast(intent);
-    }
-
-
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {
-        if(intent != null) {
-            hash = intent.getExtras().getString(BaseUser.HASH_ARG);
-            if(isCorrectHash() && !isConnectionEstablished) {
-                establishConnectionWithServer();
-            }
-        }
-        return mBinder;
     }
 
 
@@ -135,6 +124,9 @@ public class SocketListenerService extends Service {
                 in = mSocket.getInputStream();
                 out = mSocket.getOutputStream();
                 //reg into chat
+                String hash = ((WinterSportCoachesApplication)getApplication()).getUser().getHash();
+                if(!isCorrectHash(hash))
+                    return;
                 String registrationString = Protocol.encodeInitString(hash);
                 out.write(registrationString.getBytes(Charset.forName("UTF-8")));
             } catch (IOException e) {

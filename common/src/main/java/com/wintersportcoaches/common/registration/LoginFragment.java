@@ -18,7 +18,7 @@ import com.wintersportcoaches.common.base.UserActivity;
 import com.wintersportcoaches.common.rest.service.NetworkServiceFactory;
 import com.wintersportcoaches.common.base.presenter.PresenterManager;
 import com.wintersportcoaches.common.ui.PhoneTextWatcher;
-import com.wintersportcoaches.common.utils.UIUtils;
+import com.wintersportcoaches.common.utils.Utils;
 import com.wintersportcoaches.common.utils.ValidationUtils;
 
 /**
@@ -88,7 +88,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
     public boolean validatePassword() {
         if (passwordEditText.getText().toString().trim().isEmpty()) {
             passwordTextInputLayout.setError(getString(R.string.incorrect_password));
-            UIUtils.requestFocus(passwordEditText, getActivity());
+            Utils.requestFocus(passwordEditText, getActivity());
             return false;
         } else {
             passwordTextInputLayout.setError(null);

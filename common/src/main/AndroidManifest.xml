@@ -14,14 +14,6 @@
             android:name="com.wintersportcoaches.common.service.SocketListenerService"
             android:enabled="true"
             android:exported="true"/>
-        <receiver android:name="com.wintersportcoaches.common.service.MessagesBroadcastReciever">
-
-            <intent-filter>
-                <action android:name="@string/message_intent">
-                </action>
-            </intent-filter>
-
-        </receiver>
     </application>
 
 </manifest>

@@ -2,6 +2,7 @@ package com.wintersportcoaches.common;
 
 import android.app.Application;
 
+import com.wintersportcoaches.common.service.SocketListenerService;
 import com.wintersportcoaches.common.user.BaseUser;
 
 /**
@@ -26,5 +27,8 @@ public class WinterSportCoachesApplication extends android.app.Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        if(isLogin()) {
+            SocketListenerService.start(this);
+        }
     }
 }
