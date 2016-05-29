@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+            android:background="?colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image_civ"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="96dp"
+            android:src="@color/deep_purple"
+            android:layout_width="128dp"
+            android:layout_height="128dp" />
+        <ImageView
+            android:layout_marginTop="132dp"
+            android:layout_marginLeft="32dp"
+            android:tint="?colorAccent"
+            android:src="@drawable/circle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_marginTop="132dp"
+            android:layout_marginRight="32dp"
+            android:tint="?colorAccent"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/circle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <include
+            android:id="@+id/profile_with_image_rl"
+            android:layout_below="@+id/profile_image_civ"
+            layout="@layout/name_with_additional_data"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent" />
+
+        <View android:layout_below="@id/profile_with_image_rl"
+            android:id="@+id/line_v"
+            android:layout_margin="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_500"/>
+        <LinearLayout
+            android:id="@+id/about_container_ll"
+            android:orientation="vertical"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_below="@+id/line_v"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.wintersportcoaches.common.ui.views.IconWithHeaderTextView
+                app:iconImage="@drawable/vector_add_ic"
+                app:titleText="О себе"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                tools:text="asdasdasdasdasdasdasdasdasdqwdqwdqwdqqq"
+                android:id="@+id/short_info_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <com.wintersportcoaches.common.ui.views.SkillsView
+            android:id="@+id/skill_sv"
+            android:layout_marginTop="8dp"
+            app:contentPaddingLeft="16dp"
+            android:layout_below="@id/about_container_ll"
+            android:orientation="vertical"
+            app:cardElevation="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            </com.wintersportcoaches.common.ui.views.SkillsView>
+    </RelativeLayout>
+</ScrollView>

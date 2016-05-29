@@ -15,20 +15,20 @@ import java.util.ArrayList;
 public class BaseUser {
 
     public static final String DEFAULT_FIRST_NAME = "Регистрация";
-    private static final String DEFAULT_LAST_NAME = "";
-    private static final String DEFAULT_TELEPOHNE = "";
+    public static final String DEFAULT_LAST_NAME = "";
+    public static final String DEFAULT_TELEPOHNE = "";
 
-    private static final String FIRST_NAME_ARG = "firstName";
-    private static final String LAST_NAME_ARG = "lastName";
-    private static final String TELEPHONE_ARG = "telephone";
-    private static final String PHOTO_BACKEND_ARG = "PHOTO_BACKEND_ARG";
-    private static final String LOGIN_ARG = "login";
+    public static final String FIRST_NAME_ARG = "firstName";
+    public static final String LAST_NAME_ARG = "lastName";
+    public static final String TELEPHONE_ARG = "telephone";
+    public static final String PHOTO_BACKEND_ARG = "PHOTO_BACKEND_ARG";
+    public static final String LOGIN_ARG = "login";
     public static final String HASH_ARG = "hash";
-    private static final String ID_ARGS = "id";
-    private static final String RATING_ARG = "rating";
-    private static final String EMAIL_ARG = "EMAIL_ARG";
+    public static final String ID_ARGS = "id";
+    public static final String RATING_ARG = "rating";
+    public static final String EMAIL_ARG = "EMAIL_ARG";
 
-    protected SharedPreferences preferences;
+
 
     public int getUserId() {
         return userId;
@@ -64,47 +64,55 @@ public class BaseUser {
         return hash != null && !hash.equals("");
     }
 
-
-    public BaseUser(Context context) {
-        String appName = context.getString(R.string.app_name);
-        preferences = context.getSharedPreferences(appName, Context.MODE_PRIVATE);
-        firstName = preferences.getString(FIRST_NAME_ARG, DEFAULT_FIRST_NAME);
-        lastName = preferences.getString(LAST_NAME_ARG, DEFAULT_LAST_NAME);
-        phone = preferences.getString(TELEPHONE_ARG, DEFAULT_TELEPOHNE);
-        photoUrl = preferences.getString(PHOTO_BACKEND_ARG, "");
-        isLogin = preferences.getBoolean(LOGIN_ARG, false);
-        hash = preferences.getString(HASH_ARG, "");
-        userId = preferences.getInt(ID_ARGS, 0);
-        rating = preferences.getFloat(RATING_ARG, 0);
-        email = preferences.getString(EMAIL_ARG, "");
+    public String getPhone() {
+        return phone;
     }
 
-    public void saveUser(Context context) {
-        String appName = context.getString(R.string.app_name);
-        preferences = context.getSharedPreferences(appName, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean(LOGIN_ARG, true);
-        editor.putString(FIRST_NAME_ARG, firstName);
-        editor.putString(LAST_NAME_ARG, lastName);
-        editor.putString(TELEPHONE_ARG, phone);
-        editor.putString(PHOTO_BACKEND_ARG, photoUrl);
-        editor.putString(HASH_ARG, hash);
-        editor.putInt(ID_ARGS, userId);
-        editor.putString(EMAIL_ARG, email);
-        editor.putFloat(RATING_ARG, rating);
-        editor.apply();
+    public String getEmail() {
+        return email;
     }
 
-    public void exit(Context context) {
-        String appName = context.getString(R.string.app_name);
-        preferences = context.getSharedPreferences(appName, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.clear();
-        editor.apply();
-        clearProperties();
+    public float getRating() {
+        return rating;
     }
 
-    public void clearProperties() {
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public BaseUser() {
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
+    }
+
+    public void setLogin(boolean login) {
+        isLogin = login;
+    }
+
+
+    public void setDefaultProperties() {
         firstName = DEFAULT_FIRST_NAME;
         lastName = DEFAULT_LAST_NAME;
         phone = DEFAULT_TELEPOHNE;
@@ -115,6 +123,13 @@ public class BaseUser {
         rating = 0;
         email = "";
     }
+
+    public String getFullName() {
+        if(firstName.equals("") || lastName.equals(""))
+            throw new IllegalStateException("names cannot be empty");
+        return firstName + " " + lastName;
+    }
+
 
     public void setHash(String hash) {
         this.hash = hash;

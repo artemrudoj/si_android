@@ -2,33 +2,40 @@ package com.wintersportcoaches.common.base.presenter;
 
 import android.os.Bundle;
 
+import com.wintersportcoaches.common.base.BaseFragment;
 import com.wintersportcoaches.common.model.Message;
 import com.wintersportcoaches.common.service.BindedServiceFragment;
 
 /**
  * Created by artem on 27.05.16.
  */
-public abstract class PresenteredFragment extends BindedServiceFragment {
+public abstract class PresenteredFragment<T extends BasePresenter> extends BaseFragment {
 
-    protected BasePresenter presenter;
+    protected T presenter;
 
 
     @Override
     public void onResume() {
         super.onResume();
-        presenter.bindView(this);
+        if(presenter != null)
+            presenter.bindView(this);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-
-        presenter.unbindView();
+        if(presenter != null)
+            presenter.unbindView();
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        if(presenter != null) PresenterManager.getInstance().savePresenter(presenter, outState);
+        if(presenter != null)
+            PresenterManager.getInstance().savePresenter(presenter, outState);
+    }
+
+    public T getPresenter() {
+        return presenter;
     }
 }

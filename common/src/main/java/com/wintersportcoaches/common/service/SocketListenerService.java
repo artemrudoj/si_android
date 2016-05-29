@@ -135,7 +135,6 @@ public class SocketListenerService extends Service {
             Toast.makeText(this, "service establishConnectionWithServer", Toast.LENGTH_SHORT).show();
             establishConnectionWithServer();
         }
-
         return START_STICKY;
     }
 

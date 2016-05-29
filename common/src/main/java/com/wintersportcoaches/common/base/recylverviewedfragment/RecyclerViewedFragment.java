@@ -1,6 +1,7 @@
 package com.wintersportcoaches.common.base.recylverviewedfragment;
 
 import com.wintersportcoaches.common.base.presenter.PresenteredFragment;
+import com.wintersportcoaches.common.service.BindedServiceFragment;
 import com.wintersportcoaches.common.ui.FragmentProgressBarHelper;
 
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
 /**
  * Created by artem on 27.05.16.
  */
-public abstract class RecyclerViewedFragment extends PresenteredFragment implements RecycledBaseView {
+public abstract class RecyclerViewedFragment extends BindedServiceFragment implements RecycledBaseView {
     protected BaseRecyclerViewAdapter mAdapter;
     protected FragmentProgressBarHelper mFragmentProgressBarHelper;
 

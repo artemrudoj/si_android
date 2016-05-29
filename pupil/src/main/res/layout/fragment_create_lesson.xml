@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.wintersportcoaches.common.ui.views.IconWithHeaderTextView
+        app:iconImage="@drawable/vector_hearth_ic"
+        app:titleText="Вид спорта"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <com.wintersportcoaches.common.ui.views.RadioRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.wintersportcoaches.common.ui.views.CircleButtonWithText
+            android:id="@+id/snowboard_cbwt"
+            android:layout_centerHorizontal="true"
+            app:titleText="Сноуборд"
+            app:iconImage="@drawable/vector_snowboard_ic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <com.wintersportcoaches.common.ui.views.CircleButtonWithText
+            android:id="@+id/ski_cbwt"
+            android:layout_centerHorizontal="true"
+            android:layout_toRightOf="@+id/snowboard_cbwt"
+            app:titleText="Сноуборд"
+            app:iconImage="@drawable/vector_snowboard_ic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </com.wintersportcoaches.common.ui.views.RadioRelativeLayout>
+    <com.wintersportcoaches.common.ui.views.PickerButton
+        app:iconImage="@drawable/vector_skill_ic"
+        app:titleText="Навык для улучшения"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

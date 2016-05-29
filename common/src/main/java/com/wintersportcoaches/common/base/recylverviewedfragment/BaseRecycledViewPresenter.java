@@ -53,10 +53,10 @@ public abstract class BaseRecycledViewPresenter<M,V> extends BasePresenter<M,V> 
         @Override
         protected void success(Call<List<M>> call, Response<List<M>> response) {
             super.success(call, response);
-            model = (M) response.body();
-            ((RecycledBaseView) view()).showData((List) model);
+            setModel((M) response.body());
         }
     };
+
 
     protected abstract void loadData();
 

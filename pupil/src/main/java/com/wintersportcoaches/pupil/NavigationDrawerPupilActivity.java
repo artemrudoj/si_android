@@ -2,8 +2,8 @@ package com.wintersportcoaches.pupil;
 
 
 import android.content.Intent;
-import android.os.Bundle;
 
+import com.wintersportcoaches.common.WinterSportCoachesApplication;
 import com.wintersportcoaches.common.base.navigationdrawer.NavigationDrawerListBaseAdapter;
 import com.wintersportcoaches.common.base.navigationdrawer.NavigationDrawerProfileActivity;
 import com.wintersportcoaches.common.base.navigationdrawer.NavigationItem;
@@ -11,9 +11,10 @@ import com.wintersportcoaches.common.base.navigationdrawer.TapHandler;
 import com.wintersportcoaches.common.service.SocketListenerService;
 import com.wintersportcoaches.pupil.chats.ChatsContainerActivity;
 import com.wintersportcoaches.pupil.coaches.CoachesListContainerActivity;
-import com.wintersportcoaches.pupil.createlesson.CreateLessonActivity;
-import com.wintersportcoaches.pupil.lessonlist.HistoryLessonActivity;
-import com.wintersportcoaches.pupil.lessonlist.LessonListActivity;
+import com.wintersportcoaches.pupil.lesson.create.CreateLessonActivity;
+import com.wintersportcoaches.pupil.lesson.lessonlist.HistoryLessonActivity;
+import com.wintersportcoaches.pupil.lesson.lessonlist.LessonListActivity;
+import com.wintersportcoaches.pupil.profile.ProfileContainerActivity;
 
 import java.util.ArrayList;
 
@@ -56,7 +57,8 @@ public class NavigationDrawerPupilActivity extends NavigationDrawerProfileActivi
         items.add(new NavigationItem(R.drawable.vector_log_out_icon, R.string.log_out, false, false, new TapHandler() {
             @Override
             public void onTap() {
-                getUser().exit(getApplicationContext());
+                WinterSportCoachesApplication.get(NavigationDrawerPupilActivity.this).
+                        exitFromCurrentUser();
                 SocketListenerService.stop(getApplicationContext());
             }
         }));

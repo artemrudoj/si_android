@@ -25,6 +25,9 @@ public interface NetworkService {
     @POST("/api/user/users_get/")
     Call<List<BaseUser>> users_get();
 
+    @POST("/api/user/get/")
+    Call<BaseUser> user_get(@Field("id") int id);
+
     @FormUrlEncoded
     @POST("/api/chat/get_my_list/")
     Call<List<Chat>> chats_get(@Field("hash") String hash);
@@ -37,6 +40,8 @@ public interface NetworkService {
     @FormUrlEncoded
     @POST("/api/chat/get_with_user/")
     Call<Chat> get_chat_with_user(@Field("hash") String hash, @Field("id") int id);
+
+
 
 
 

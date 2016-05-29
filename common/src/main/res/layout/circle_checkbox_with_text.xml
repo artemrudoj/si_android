@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <FrameLayout
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/oval_fl"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:background="@drawable/circle"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+    <ImageView
+        android:src="@drawable/vector_snowboard_ic"
+        android:id="@+id/icon_iv"
+        android:layout_gravity="center"
+        android:layout_width="24dp"
+        android:layout_height="24dp"/>
+    </FrameLayout>
+    <TextView
+        android:id="@+id/text_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="16sp"
+        tools:text="Сноубордфывфывя"
+        android:layout_below="@+id/btn_oval"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp" />
+</LinearLayout>

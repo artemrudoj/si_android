@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.artem.common.R;
 import com.wintersportcoaches.common.base.BaseFragment;
 import com.wintersportcoaches.common.base.UserActivity;
+import com.wintersportcoaches.common.base.presenter.PresenteredFragment;
 import com.wintersportcoaches.common.model.Message;
 import com.wintersportcoaches.common.user.BaseUser;
 import com.wintersportcoaches.common.utils.Utils;
@@ -27,7 +28,7 @@ import java.lang.ref.WeakReference;
 /**
  * Created by artem on 25.05.16.
  */
-public abstract class BindedServiceFragment extends BaseFragment  {
+public abstract class BindedServiceFragment extends PresenteredFragment {
 
     private BroadcastReceiver mReceiver;
 

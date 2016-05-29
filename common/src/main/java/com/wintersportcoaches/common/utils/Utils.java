@@ -3,6 +3,7 @@ package com.wintersportcoaches.common.utils;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
@@ -39,5 +40,9 @@ public class Utils {
             }
         }
         return false;
+    }
+
+    public static String fromIntPriceToString(int price) {
+        return Integer.toString(price) + " руб/час";
     }
 }

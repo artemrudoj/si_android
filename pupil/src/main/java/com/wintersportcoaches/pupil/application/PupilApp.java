@@ -11,6 +11,8 @@ public class PupilApp extends WinterSportCoachesApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        user = new PupilUser(this);
+        user = new PupilUser();
+        getRepository().restoreUser(user);
+        startService();
     }
 }

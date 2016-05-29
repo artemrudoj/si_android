@@ -2,6 +2,7 @@ package com.wintersportcoaches.common.registration;
 
 import android.support.annotation.NonNull;
 
+import com.wintersportcoaches.common.model.LocalDataRepository;
 import com.wintersportcoaches.common.rest.LoginResponseSerializer;
 import com.wintersportcoaches.common.rest.handleerror.CommonErrorHandleRetofitCallback;
 import com.wintersportcoaches.common.rest.service.NetworkService;
@@ -18,9 +19,11 @@ import retrofit2.Response;
 public class LoginPresenter extends BasePresenter<BaseUser, LoginView> {
     private boolean mIsLoadingData = false;
     NetworkService mNetworkService;
+    LocalDataRepository repository;
 
-    public LoginPresenter(NetworkService mNetworkService) {
+    public LoginPresenter(NetworkService mNetworkService, LocalDataRepository repository) {
         this.mNetworkService = mNetworkService;
+        this.repository = repository;
     }
 
     @Override
@@ -59,7 +62,7 @@ public class LoginPresenter extends BasePresenter<BaseUser, LoginView> {
                             protected void success(Call<LoginResponseSerializer> call, Response<LoginResponseSerializer> response) {
                                 model.setHash(response.body().getHash());
                                 model.setUserId(response.body().getId());
-                                model.saveUser(view().getContext());
+                                repository.saveUser(model);
                                 if(view() != null) view().successLogin();
                             }
                         });

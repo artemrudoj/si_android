@@ -22,17 +22,15 @@ import com.wintersportcoaches.pupil.user.PupilUser;
  */
 public class CoachesViewHolder  extends RecyclerView.ViewHolder {
     private final ImageView openChatBtn;
-    private TextView mFirstName;
-    private TextView mSecondName;
+    private TextView mFullName;
     private CardView rootView;
     private BaseUser item;
     private int position;
 
-    public CoachesViewHolder(final CardView itemView, final ActivityHolder activityHolder) {
+    public CoachesViewHolder(CardView itemView, final ActivityHolder activityHolder) {
         super(itemView);
         rootView = itemView;
-        mFirstName = (TextView) itemView.findViewById(R.id.first_name_tv);
-        mSecondName = (TextView)itemView.findViewById(R.id.second_name_tv);
+        mFullName = (TextView)itemView.findViewById(R.id.full_name_tv);
         openChatBtn = (ImageView) itemView.findViewById(R.id.send_message_iv);
 
         openChatBtn.setOnClickListener(new View.OnClickListener() {
@@ -58,8 +56,7 @@ public class CoachesViewHolder  extends RecyclerView.ViewHolder {
 
     public void setItem(BaseUser item) {
         this.item = item;
-        mFirstName.setText(item.getFirstName());
-        mSecondName.setText(item.getLastName());
+        mFullName.setText(item.getFullName());
     }
 
     public void setPosition(int position) {

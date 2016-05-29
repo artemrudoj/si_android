@@ -7,7 +7,8 @@ import java.util.List;
  */
 public interface RecycledBaseView<T> {
     void showLoading();
-    void showEmpty();
     void stopLoading();
+    void showEmpty();
+
     void showData(List<T> data);
 }

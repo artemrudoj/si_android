@@ -1,0 +1,46 @@
+<RelativeLayout android:id="@+id/info_container_rl"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <TextView
+        android:id="@+id/full_name_tv"
+        android:textSize="18sp"
+        android:fontFamily="sans-serif-medium"
+        tools:text="Alex Хацкеsadasвич"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_below="@id/full_name_tv"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            tools:text="25 лет"
+            android:id="@+id/age_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/full_name_tv"
+            tools:text="\u2022"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:id="@+id/pulk_tv"
+            android:layout_toRightOf="@id/age_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/full_name_tv"
+            tools:text="мужской"
+            android:id="@+id/gender_tv"
+            android:layout_toRightOf="@id/pulk_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</RelativeLayout>

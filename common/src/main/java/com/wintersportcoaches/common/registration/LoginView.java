@@ -1,6 +1,6 @@
 package com.wintersportcoaches.common.registration;
 
-import android.content.Context;
+
 
 /**
  * Created by artem on 23.05.16.
@@ -16,5 +16,4 @@ public interface LoginView {
 
     void successLogin();
 
-    Context getContext();
 }

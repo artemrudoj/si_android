@@ -13,8 +13,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.artem.common.R;
-import com.wintersportcoaches.common.base.BaseFragment;
+import com.wintersportcoaches.common.WinterSportCoachesApplication;
 import com.wintersportcoaches.common.base.UserActivity;
+import com.wintersportcoaches.common.base.presenter.PresenteredFragment;
 import com.wintersportcoaches.common.rest.service.NetworkServiceFactory;
 import com.wintersportcoaches.common.base.presenter.PresenterManager;
 import com.wintersportcoaches.common.service.SocketListenerService;
@@ -25,14 +26,13 @@ import com.wintersportcoaches.common.utils.ValidationUtils;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LoginFragment extends BaseFragment implements LoginView {
+public class LoginFragment extends PresenteredFragment<LoginPresenter> implements LoginView {
 
 
     public LoginFragment() {
         // Required empty public constructor
     }
 
-    private LoginPresenter presenter;
     EditText phoneEditText;
     EditText passwordEditText;
 
@@ -47,7 +47,8 @@ public class LoginFragment extends BaseFragment implements LoginView {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_login, container, false);
         if (savedInstanceState == null) {
-            presenter = new LoginPresenter(NetworkServiceFactory.getNetworkService());
+            presenter = new LoginPresenter(NetworkServiceFactory.getNetworkService(),
+                    WinterSportCoachesApplication.get(getActivity()).getRepository());
             presenter.setModel(((UserActivity)getActivity()).getUser());
         } else {
             presenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
@@ -127,24 +128,5 @@ public class LoginFragment extends BaseFragment implements LoginView {
     public void successLogin() {
         SocketListenerService.start(getActivity());
         getActivity().finish();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        presenter.unbindView();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        presenter.bindView(this);
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        PresenterManager.getInstance().savePresenter(presenter, outState);
     }
 }
