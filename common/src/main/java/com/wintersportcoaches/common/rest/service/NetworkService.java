@@ -22,9 +22,21 @@ public interface NetworkService {
                                              @Field("password") String password);
 
 
+    @FormUrlEncoded
+    @POST("/api/user/register/")
+    Call<String> user_register(@Field("phone") String phone,
+                               @Field("password") String password,
+                               @Field("first_name") String first_name,
+                               @Field("last_name") String last_name,
+                               @Field("email") String email,
+                               @Field("is_couch") Boolean isCoach);
+
+
+    @FormUrlEncoded
     @POST("/api/user/users_get/")
     Call<List<BaseUser>> users_get();
 
+    @FormUrlEncoded
     @POST("/api/user/get/")
     Call<BaseUser> user_get(@Field("id") int id);
 

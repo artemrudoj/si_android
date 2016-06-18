@@ -10,4 +10,16 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="incorrect_phone_number">Некорректный номер телефона</string>
     <string name="incorrect_password">Некорректный пароль</string>
+    <string name="last_name">Фамилия</string>
+    <string name="name">Имя</string>
+    <string name="email">E-mail</string>
+    <string name="phone_number">Номер телефона</string>
+    <string name="phone_mask" >+7(_ _ _)_ _ _-_ _-_ _</string>
+    <string name="password">Пароль</string>
+    <string name="repeat_password">Повторите пароль</string>
+    <string name="registrate">ЗАРЕГЕСТРИРОВАТЬСЯ</string>
+    <string name="cannot_be_empty">Поле не может быть пустым</string>
+    <string name="password_requirements">Длина пароля не может быть короче 5 символов</string>
+    <string name="incorrect_email">Некорректный e-mail</string>
+    <string name="incorrect_password_repeat">Пароли не совпадают</string>
 </resources>

@@ -1,6 +1,7 @@
-package com.wintersportcoaches.common.registration;
+package com.wintersportcoaches.common.login;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
@@ -16,10 +17,11 @@ import com.artem.common.R;
 import com.wintersportcoaches.common.WinterSportCoachesApplication;
 import com.wintersportcoaches.common.base.UserActivity;
 import com.wintersportcoaches.common.base.presenter.PresenteredFragment;
+import com.wintersportcoaches.common.registration.RegistrationActivity;
 import com.wintersportcoaches.common.rest.service.NetworkServiceFactory;
 import com.wintersportcoaches.common.base.presenter.PresenterManager;
 import com.wintersportcoaches.common.service.SocketListenerService;
-import com.wintersportcoaches.common.ui.PhoneTextWatcher;
+import com.wintersportcoaches.common.ui.tools.PhoneTextWatcher;
 import com.wintersportcoaches.common.utils.Utils;
 import com.wintersportcoaches.common.utils.ValidationUtils;
 
@@ -63,6 +65,12 @@ public class LoginFragment extends PresenteredFragment<LoginPresenter> implement
             @Override
             public void onClick(View v) {
                 presenter.loginButtonPressed();
+            }
+        });
+        view.findViewById(R.id.registrate_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToRegistrationActivity();
             }
         });
         phoneTextInputLayout = (TextInputLayout)view.findViewById(R.id.phone_et_container);
@@ -111,7 +119,8 @@ public class LoginFragment extends PresenteredFragment<LoginPresenter> implement
 
     @Override
     public void goToRegistrationActivity() {
-
+        Intent intent = new Intent(getActivity(), RegistrationActivity.class);
+        getActivity().startActivity(intent);
     }
 
     @Override

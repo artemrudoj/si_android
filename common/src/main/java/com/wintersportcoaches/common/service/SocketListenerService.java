@@ -12,6 +12,7 @@ import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.JsonReader;
 import android.widget.Toast;
 
@@ -141,7 +142,7 @@ public class SocketListenerService extends Service {
     public void notifyListeners(final Message msg) {
         Intent intent = msg.insertToIntent();
         intent.setAction(getString(R.string.message_intent));
-        sendBroadcast(intent);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
 

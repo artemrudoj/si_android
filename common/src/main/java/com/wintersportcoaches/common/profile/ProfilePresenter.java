@@ -1,10 +1,8 @@
-package com.wintersportcoaches.common.base.profile;
+package com.wintersportcoaches.common.profile;
 
 import android.support.annotation.NonNull;
 
 import com.wintersportcoaches.common.base.presenter.BasePresenter;
-import com.wintersportcoaches.common.base.recylverviewedfragment.RecycledBaseView;
-import com.wintersportcoaches.common.registration.LoginView;
 import com.wintersportcoaches.common.rest.handleerror.CommonErrorHandleRetofitCallback;
 import com.wintersportcoaches.common.rest.service.NetworkService;
 import com.wintersportcoaches.common.user.BaseUser;
@@ -18,7 +16,12 @@ import retrofit2.Response;
 public class ProfilePresenter extends BasePresenter<BaseUser, ProfileView> {
     NetworkService networkService;
     private boolean mIsLoadingData = false;
+    BaseUser currentUser;
     int userId;
+
+    public void setCurrentUser(BaseUser currentUser) {
+        this.currentUser = currentUser;
+    }
 
     public ProfilePresenter(NetworkService networkService, int userId) {
         this.networkService = networkService;
@@ -68,4 +71,7 @@ public class ProfilePresenter extends BasePresenter<BaseUser, ProfileView> {
         });
     }
 
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 }

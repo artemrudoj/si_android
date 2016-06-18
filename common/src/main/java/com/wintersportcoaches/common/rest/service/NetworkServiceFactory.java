@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class NetworkServiceFactory {
 
-    public final static String WSC_SERVER_URL = "http://ec2-54-93-219-101.eu-central-1.compute.amazonaws.com:8000/";
+    public final static String WSC_SERVER_URL = "http://adventtime.ru/";
     private static final OkHttpClient CLIENT = new OkHttpClient();
 
     public static NetworkService getNetworkService() {

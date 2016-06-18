@@ -33,4 +33,52 @@
         app:titleText="Навык для улучшения"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/min_price_til"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp">
+    <EditText
+        android:id="@+id/min_price_et"
+        android:hint="от"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:imeOptions="actionNext" />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/max_price_til"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp">
+    <EditText
+        android:id="@+id/max_price_et"
+        android:hint="до"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp" />
+    </android.support.design.widget.TextInputLayout>
+    <com.wintersportcoaches.common.ui.views.IconWithHeaderTextView
+        app:iconImage="@drawable/vector_location_ic"
+        app:titleText="Место"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <com.wintersportcoaches.common.ui.views.IconWithHeaderTextView
+        android:id="@+id/time_icwht"
+        app:iconImage="@drawable/vector_time_ic"
+        app:titleText="Время"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <com.wintersportcoaches.common.ui.views.IconWithHeaderTextView
+        android:id="@+id/date_icwht"
+        app:iconImage="@drawable/vector_time_ic"
+        app:titleText="Дата"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <com.wintersportcoaches.common.ui.views.IconWithHeaderTextView
+        android:id="@+id/dration_icwht"
+        app:iconImage="@drawable/vector_duration_ic"
+        app:titleText="Продолжительность"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

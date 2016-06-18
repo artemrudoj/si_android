@@ -1,20 +1,16 @@
-package com.wintersportcoaches.common.base.profile;
+package com.wintersportcoaches.common.profile;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.artem.common.R;
-import com.wintersportcoaches.common.WinterSportCoachesApplication;
-import com.wintersportcoaches.common.base.BaseFragment;
-import com.wintersportcoaches.common.base.UserActivity;
 import com.wintersportcoaches.common.base.presenter.PresenterManager;
 import com.wintersportcoaches.common.base.presenter.PresenteredFragment;
 import com.wintersportcoaches.common.model.Skill;
-import com.wintersportcoaches.common.registration.LoginPresenter;
 import com.wintersportcoaches.common.rest.service.NetworkServiceFactory;
-import com.wintersportcoaches.common.ui.FragmentProgressBarHelper;
 import com.wintersportcoaches.common.ui.views.SkillsView;
 import com.wintersportcoaches.common.user.BaseUser;
 
@@ -27,16 +23,32 @@ import java.util.HashMap;
  */
 public class ProfileFragment extends PresenteredFragment<ProfilePresenter> implements ProfileView{
     int userId;
+    final public  static String EXTRA_USER_ID = "ProfileFragment.userId";
     SkillsView skillsView;
+    TextView fullNameTextView;
+    TextView ageTextView;
+    TextView genderTextView;
+
+    public static ProfileFragment newInstance(Bundle args) {
+        ProfileFragment profileFragment = new ProfileFragment();
+        profileFragment.setArguments(args);
+        return profileFragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        userId = getArguments().getInt(EXTRA_USER_ID);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.main_profile_layout, container, false);
-        userId = 12;
         if (savedInstanceState == null) {
             presenter = new ProfilePresenter(NetworkServiceFactory.getNetworkService(), userId);
-            presenter.setModel(((UserActivity)getActivity()).getUser());
+            presenter.setUserId(userId);
         } else {
             presenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
         }
@@ -45,8 +57,12 @@ public class ProfileFragment extends PresenteredFragment<ProfilePresenter> imple
         return view;
     }
 
-    private void initViews(View view) {
+    private void initViews(View view)
+    {
         skillsView = (SkillsView)view.findViewById(R.id.skill_sv);
+        fullNameTextView = (TextView)view.findViewById(R.id.full_name_tv);
+        ageTextView = (TextView)view.findViewById(R.id.age_tv);
+        genderTextView = (TextView)view.findViewById(R.id.gender_tv);
     }
 
     @Override
@@ -61,6 +77,7 @@ public class ProfileFragment extends PresenteredFragment<ProfilePresenter> imple
 
     @Override
     public void showUser(BaseUser baseUser) {
+        fullNameTextView.setText(baseUser.getFullName());
         HashMap<String, Integer> hashMap = new HashMap<>();
         hashMap.put("для новичков", 1000);
         Skill skill = new Skill("Сноуборд", hashMap);

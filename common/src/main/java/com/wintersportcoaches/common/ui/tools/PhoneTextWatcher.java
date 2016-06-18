@@ -1,4 +1,4 @@
-package com.wintersportcoaches.common.ui;
+package com.wintersportcoaches.common.ui.tools;
 
 import android.text.Editable;
 import android.text.TextWatcher;

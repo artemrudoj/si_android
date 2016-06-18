@@ -53,14 +53,4 @@
             android:gravity="start"
             android:id="@+id/last_name_tv"/>
     </LinearLayout>
-    <TextView
-        android:paddingTop="8dp"
-        android:paddingBottom="12dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/phone_tv"
-        android:gravity="start"
-        android:text="asdasd"
-        android:textColor="@android:color/white"
-        android:textSize="14sp" />
 </LinearLayout>

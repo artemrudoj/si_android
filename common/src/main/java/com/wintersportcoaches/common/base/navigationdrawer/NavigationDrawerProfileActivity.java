@@ -14,9 +14,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.artem.common.R;
-import com.wintersportcoaches.common.base.ToolbarActivity;
 import com.wintersportcoaches.common.base.UserActivity;
-import com.wintersportcoaches.common.registration.LoginActivity;
+import com.wintersportcoaches.common.login.LoginActivity;
 import com.wintersportcoaches.common.ui.views.NavigarionDrawerHeaderView;
 
 
@@ -28,6 +27,7 @@ public abstract class NavigationDrawerProfileActivity  extends UserActivity impl
     DrawerLayout drawer;
     ListView recordsListView;
     NavigationDrawerListBaseAdapter adapter;
+    protected NavigarionDrawerHeaderView headerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,8 @@ public abstract class NavigationDrawerProfileActivity  extends UserActivity impl
         recordsListView.setOnItemClickListener(this);
         adapter = createAdapter();
 
-        View headerView = new NavigarionDrawerHeaderView(this);
+        headerView = new NavigarionDrawerHeaderView(this);
+        headerView.setUser(getUser());
         recordsListView.addHeaderView(headerView, null, false);
 
         recordsListView.setAdapter(adapter);

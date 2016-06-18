@@ -2,6 +2,7 @@ package com.wintersportcoaches.pupil;
 
 
 import android.content.Intent;
+import android.os.Bundle;
 
 import com.wintersportcoaches.common.WinterSportCoachesApplication;
 import com.wintersportcoaches.common.base.navigationdrawer.NavigationDrawerListBaseAdapter;
@@ -20,6 +21,11 @@ import java.util.ArrayList;
 
 public class NavigationDrawerPupilActivity extends NavigationDrawerProfileActivity {
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        headerView.setProfileActivityClass(ProfileContainerActivity.class);
+    }
 
     @Override
     protected NavigationDrawerListBaseAdapter createAdapter() {

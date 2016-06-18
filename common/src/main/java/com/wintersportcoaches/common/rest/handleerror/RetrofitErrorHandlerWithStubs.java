@@ -2,6 +2,9 @@ package com.wintersportcoaches.common.rest.handleerror;
 
 import android.util.Log;
 
+import java.io.IOException;
+
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -118,6 +121,15 @@ public abstract class RetrofitErrorHandlerWithStubs<T> extends BaseRetrofitError
     }
 
     String getErrorString(Response response) {
+        ResponseBody responseBody = response.errorBody();
+        if(responseBody != null) {
+            try {
+                String str = responseBody.string();
+                return Integer.toString(response.code()) + " " + " - this code was not handled in " + response.raw().request().url().toString() + " " + str;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         return Integer.toString(response.code()) + " " + " - this code was not handled in " + response.raw().request().url().toString();
     }
 

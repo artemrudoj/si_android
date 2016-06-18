@@ -1,23 +1,22 @@
 package com.wintersportcoaches.pupil.profile;
 
-import android.app.Activity;
+
 import android.os.Bundle;
-
-import com.wintersportcoaches.common.base.navigationdrawer.NavigationDrawerProfileActivity;
-import com.wintersportcoaches.common.base.profile.ProfileFragment;
-import com.wintersportcoaches.pupil.NavigationDrawerPupilActivity;
+import com.wintersportcoaches.common.base.UserActivity;
+import com.wintersportcoaches.common.profile.ProfileFragment;
 import com.wintersportcoaches.pupil.R;
-import com.wintersportcoaches.pupil.coaches.CoachesListFragment;
 
-public class ProfileContainerActivity extends NavigationDrawerPupilActivity {
+
+public class ProfileContainerActivity extends UserActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setToolbar(R.string.instructors);
-        addHomeProfileButton();
+        setContentView(R.layout.activity_with_toolbar);
+        setToolbar(R.string.profile);
+        Bundle bundle = getIntent().getExtras();
         if(savedInstanceState == null) {
-            getFragmentManager().beginTransaction().add(R.id.container, new ProfileFragment()).commit();
+            getFragmentManager().beginTransaction().add(R.id.container, ProfileFragment.newInstance(bundle)).commit();
         }
     }
 }

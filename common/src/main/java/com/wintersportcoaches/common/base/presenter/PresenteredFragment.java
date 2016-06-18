@@ -28,6 +28,8 @@ public abstract class PresenteredFragment<T extends BasePresenter> extends BaseF
             presenter.unbindView();
     }
 
+
+
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);

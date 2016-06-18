@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:clipToPadding="false"
-    tools:context="com.wintersportcoaches.common.registration.LoginFragment"
+    tools:context="com.wintersportcoaches.common.login.LoginFragment"
     android:padding="16dp">
     <android.support.design.widget.TextInputLayout
         android:id="@+id/phone_et_container"
@@ -15,7 +15,7 @@
         android:paddingBottom="8dp">
         <EditText
             android:id="@+id/phone_et"
-            android:text="+7(_ _ _)_ _ _-_ _-_ _"
+            android:text="@string/phone_mask"
             android:hint="Номер телефона"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

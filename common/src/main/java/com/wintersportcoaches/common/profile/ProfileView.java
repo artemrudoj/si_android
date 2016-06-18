@@ -1,4 +1,4 @@
-package com.wintersportcoaches.common.base.profile;
+package com.wintersportcoaches.common.profile;
 
 import com.wintersportcoaches.common.user.BaseUser;
 

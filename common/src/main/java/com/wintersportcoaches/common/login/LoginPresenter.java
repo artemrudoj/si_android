@@ -1,4 +1,4 @@
-package com.wintersportcoaches.common.registration;
+package com.wintersportcoaches.common.login;
 
 import android.support.annotation.NonNull;
 
