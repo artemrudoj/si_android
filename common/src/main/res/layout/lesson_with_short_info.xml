@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:id="@+id/profile_with_image_rl"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:src="@color/deep_purple" />
+    <LinearLayout
+        android:gravity="center"
+        android:paddingLeft="16dp"
+        android:orientation="vertical"
+        android:layout_toRightOf="@id/profile_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.wintersportcoaches.common.ui.views.IconWithHeaderTextView
+            app:iconImage="@drawable/vector_snowboard_ic"
+            app:titleText="Вид спорта"
+            android:paddingBottom="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <com.wintersportcoaches.common.ui.views.IconWithHeaderTextView
+            android:paddingBottom="8dp"
+            app:iconImage="@drawable/vector_time_ic"
+            app:titleText="Вид спорта"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <com.wintersportcoaches.common.ui.views.IconWithHeaderTextView
+            android:paddingBottom="8dp"
+            app:iconImage="@drawable/vector_location_ic"
+            app:titleText="Вид спорта"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</RelativeLayout>

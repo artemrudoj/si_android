@@ -52,27 +52,41 @@ public class RegistrationPresenter extends BasePresenter<BaseUser, RegistrationV
                         registrationView.getLastName(),
                         registrationView.getEmail(),
                         registrationView.isCoach())
-                        .enqueue(new CommonErrorHandleRetofitCallback<String>() {
+                        .enqueue(new CommonErrorHandleRetofitCallback<LoginResponseSerializer>() {
 
                             @Override
-                            public void onFailure(Call<String> call, Throwable t) {
+                            public void onFailure(Call<LoginResponseSerializer> call, Throwable t) {
                                 super.onFailure(call, t);
                                 mIsLoadingData = false;
                             }
 
                             @Override
-                            public void onResponse(Call<String> call, Response<String> response) {
-                                super.onResponse(call, response);
-                                mIsLoadingData = false;
-                            }
+                            protected void success(Call<LoginResponseSerializer> call, Response<LoginResponseSerializer> response) {
+                                LoginResponseSerializer loginResponseSerializer = response.body();
+                                model.setHash(loginResponseSerializer.getHash());
+                                mNetworkService.user_get(response.body().getId()).enqueue(new CommonErrorHandleRetofitCallback<BaseUser>() {
+                                    @Override
+                                    public void onResponse(Call<BaseUser> call, Response<BaseUser> response) {
+                                        super.onResponse(call, response);
+                                        mIsLoadingData = false;
+                                    }
 
-                            @Override
-                            protected void success(Call<String> call, Response<String> response) {
-                                String hash = response.body();
-//                                model.setHash(response.body().getHash());
-//                                model.setUserId(response.body().getId());
-//                                repository.saveUser(model);
-//                                if(view() != null) view().successLogin();
+                                    @Override
+                                    public void onFailure(Call<BaseUser> call, Throwable t) {
+                                        super.onFailure(call, t);
+                                        mIsLoadingData = false;
+                                    }
+
+                                    @Override
+                                    protected void success(Call<BaseUser> call, Response<BaseUser> response) {
+                                        super.success(call, response);
+                                        model.init(response.body());
+                                        model.setLogin(true);
+                                        repository.saveUser(model);
+                                        if(view() != null) view().successRegistration();
+                                    }
+                                });
+
                             }
                         });
                 mIsLoadingData = true;

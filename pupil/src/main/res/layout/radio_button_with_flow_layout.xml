@@ -6,7 +6,6 @@
     <com.wefika.flowlayout.FlowLayout
         android:id="@+id/coaches_fl"
         android:layout_marginTop="12dp"
-        android:layout_marginLeft="40dp"
         android:layout_width="wrap_content"
         android:orientation="horizontal"
         android:layout_height="wrap_content">

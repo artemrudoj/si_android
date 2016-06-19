@@ -1,5 +1,6 @@
 package com.wintersportcoaches.common.registration;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 
 import com.artem.common.R;
 import com.wintersportcoaches.common.WinterSportCoachesApplication;
+import com.wintersportcoaches.common.base.UserActivity;
 import com.wintersportcoaches.common.base.presenter.PresenterManager;
 import com.wintersportcoaches.common.base.presenter.PresenteredFragment;
 import com.wintersportcoaches.common.rest.service.NetworkServiceFactory;
@@ -47,6 +49,7 @@ public class RegistrationFragment extends PresenteredFragment<RegistrationPresen
         if (savedInstanceState == null) {
             presenter = new RegistrationPresenter(NetworkServiceFactory.getNetworkService(),
                     WinterSportCoachesApplication.get(getActivity()).getRepository());
+            presenter.setModel(((WinterSportCoachesApplication)getActivity().getApplication()).getUser());
         } else {
             presenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
         }
@@ -168,6 +171,14 @@ public class RegistrationFragment extends PresenteredFragment<RegistrationPresen
     @Override
     public void showLoading() {
 
+    }
+
+    @Override
+    public void successRegistration() {
+        Activity activity = getActivity();
+        if(activity != null) {
+            activity.finish();
+        }
     }
 
     boolean validateName() {

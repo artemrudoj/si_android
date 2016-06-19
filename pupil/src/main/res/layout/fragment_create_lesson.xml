@@ -15,27 +15,33 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <com.wintersportcoaches.common.ui.views.RadioRelativeLayout
-            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <com.wintersportcoaches.common.ui.views.CircleButtonWithText
+                android:layout_marginRight="16dp"
                 android:id="@+id/snowboard_cbwt"
-                android:layout_centerHorizontal="true"
                 app:titleText="Сноуборд"
                 app:iconImage="@drawable/vector_snowboard_ic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <com.wintersportcoaches.common.ui.views.CircleButtonWithText
+                android:layout_marginLeft="16dp"
                 android:id="@+id/ski_cbwt"
-                android:layout_centerHorizontal="true"
                 android:layout_toRightOf="@+id/snowboard_cbwt"
                 app:titleText="Сноуборд"
                 app:iconImage="@drawable/vector_snowboard_ic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </com.wintersportcoaches.common.ui.views.RadioRelativeLayout>
-        <com.wintersportcoaches.common.ui.views.PickerButton
+        <!--<com.wintersportcoaches.common.ui.views.PickerButton-->
+            <!--app:iconImage="@drawable/vector_skill_ic"-->
+            <!--app:titleText="Навык для улучшения"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"/>-->
+        <com.wintersportcoaches.common.ui.views.IconWithHeaderTextView
             app:iconImage="@drawable/vector_skill_ic"
-            app:titleText="Навык для улучшения"
+            app:titleText="Цена"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <android.support.design.widget.TextInputLayout
@@ -43,7 +49,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="8dp">
+
         <EditText
+            android:inputType="number"
             android:id="@+id/min_price_et"
             android:hint="от"
             android:layout_width="match_parent"
@@ -57,6 +65,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="8dp">
         <EditText
+            android:inputType="number"
             android:id="@+id/max_price_et"
             android:hint="до"
             android:layout_width="match_parent"
@@ -66,26 +75,29 @@
         <com.wintersportcoaches.common.ui.views.IconWithHeaderTextView
             app:iconImage="@drawable/vector_location_ic"
             app:titleText="Место"
+            android:paddingBottom="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+        <!--<com.wintersportcoaches.common.ui.views.IconWithHeaderTextView-->
+            <!--android:id="@+id/time_icwht"-->
+            <!--app:iconImage="@drawable/vector_time_ic"-->
+            <!--app:titleText="Время"-->
+            <!--android:paddingBottom="8dp"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"/>-->
         <com.wintersportcoaches.common.ui.views.IconWithHeaderTextView
-            android:id="@+id/time_icwht"
-            app:iconImage="@drawable/vector_time_ic"
-            app:titleText="Время"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <com.wintersportcoaches.common.ui.views.IconWithHeaderTextView
+            android:paddingBottom="8dp"
             android:id="@+id/date_icwht"
             app:iconImage="@drawable/vector_time_ic"
             app:titleText="Дата"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-        <com.wintersportcoaches.common.ui.views.IconWithHeaderTextView
-            android:id="@+id/dration_icwht"
-            app:iconImage="@drawable/vector_duration_ic"
-            app:titleText="Продолжительность"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+        <!--<com.wintersportcoaches.common.ui.views.IconWithHeaderTextView-->
+            <!--android:id="@+id/dration_icwht"-->
+            <!--app:iconImage="@drawable/vector_duration_ic"-->
+            <!--app:titleText="Продолжительность"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"/>-->
         <com.wintersportcoaches.pupil.ui.view.ChooseCoachView
             android:id="@+id/choise_coach_ccv"
             android:layout_width="match_parent"

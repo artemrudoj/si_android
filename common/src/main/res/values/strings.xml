@@ -24,4 +24,5 @@
     <string name="incorrect_password_repeat">Пароли не совпадают</string>
     <string name="add">ДОБАВИТЬ</string>
     <string name="delete">УДАЛИТЬ</string>
+    <string name="date_picker_title">Выбор даты</string>
 </resources>

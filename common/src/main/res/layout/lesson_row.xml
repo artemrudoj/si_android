@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    card_view:cardUseCompatPadding="true"
+    card_view:cardElevation="4dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include android:id="@+id/profile_with_image_rl"
+            layout="@layout/lesson_with_short_info"/>
+        <View
+            android:id="@+id/line_v"
+            android:layout_below="@+id/profile_with_image_rl"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_500"
+            />
+        <ImageView
+            android:layout_below="@+id/line_v"
+            android:tint="@color/green_500"
+            android:id="@+id/add_to_lesson_iv"
+            android:src="@drawable/vector_approve_ic"
+            android:layout_alignParentRight="true"
+            android:layout_margin="16dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+        <ImageView
+            android:layout_below="@+id/line_v"
+            android:tint="@color/grey_500"
+            android:id="@+id/send_message_iv"
+            android:layout_toLeftOf="@+id/add_to_lesson_iv"
+            android:src="@drawable/vector_chats_ic"
+            android:layout_margin="16dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

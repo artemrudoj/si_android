@@ -30,4 +30,6 @@ public interface RegistrationView  {
     boolean isValid();
 
     void showLoading();
+
+    void successRegistration();
 }

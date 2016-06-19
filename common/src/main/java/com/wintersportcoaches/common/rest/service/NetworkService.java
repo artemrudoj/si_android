@@ -1,6 +1,7 @@
 package com.wintersportcoaches.common.rest.service;
 
 import com.wintersportcoaches.common.Chat;
+import com.wintersportcoaches.common.model.Lesson;
 import com.wintersportcoaches.common.model.Message;
 import com.wintersportcoaches.common.rest.LoginResponseSerializer;
 import com.wintersportcoaches.common.user.BaseUser;
@@ -24,7 +25,7 @@ public interface NetworkService {
 
     @FormUrlEncoded
     @POST("/api/user/register/")
-    Call<String> user_register(@Field("phone") String phone,
+    Call<LoginResponseSerializer> user_register(@Field("phone") String phone,
                                @Field("password") String password,
                                @Field("first_name") String first_name,
                                @Field("last_name") String last_name,
@@ -52,7 +53,13 @@ public interface NetworkService {
     @POST("/api/chat/get_with_user/")
     Call<Chat> get_chat_with_user(@Field("hash") String hash, @Field("id") int id);
 
-
+    @FormUrlEncoded
+    @POST("/api/chat/get_with_user/")
+    Call<Lesson> create_lesson(@Field("hash") String hash,
+                               @Field("place_string") String placeString,
+                               @Field("type") int type,
+                               @Field("time_start") String time_start,
+                               @Field("couch") String couch);
 
 
 
