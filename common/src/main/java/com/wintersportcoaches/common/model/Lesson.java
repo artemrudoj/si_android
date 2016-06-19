@@ -9,6 +9,9 @@ public class Lesson {
     final static public int SNOWBOARD = 1;
     final static public int SKI = 2;
 
+
+
+
     @SerializedName("id")
     String id;
     @SerializedName("place_string")
@@ -50,5 +53,15 @@ public class Lesson {
 
     public String getLearner() {
         return learner;
+    }
+
+    public String getKindOfSport() {
+        switch (type) {
+            case Lesson.SKI:
+                return "горные лыжи";
+            case Lesson.SNOWBOARD:
+                return "сноуборд";
+        }
+        throw new IllegalStateException("can not find correct type");
     }
 }

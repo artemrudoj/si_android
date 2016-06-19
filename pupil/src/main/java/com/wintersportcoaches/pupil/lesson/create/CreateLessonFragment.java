@@ -1,7 +1,6 @@
 package com.wintersportcoaches.pupil.lesson.create;
 
 import android.app.Activity;
-import android.app.DatePickerDialog;
 import android.app.FragmentManager;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -11,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.wintersportcoaches.common.WinterSportCoachesApplication;
 import com.wintersportcoaches.common.base.presenter.PresenterManager;
@@ -23,7 +21,7 @@ import com.wintersportcoaches.common.ui.tools.DatePickerFragment;
 import com.wintersportcoaches.common.ui.views.CircleButtonWithText;
 import com.wintersportcoaches.common.user.BaseUser;
 import com.wintersportcoaches.pupil.R;
-import com.wintersportcoaches.pupil.lesson.lessonlist.LessonListActivity;
+import com.wintersportcoaches.pupil.lesson.list.LessonListActivity;
 import com.wintersportcoaches.pupil.ui.view.ChooseCoachView;
 
 import java.text.SimpleDateFormat;

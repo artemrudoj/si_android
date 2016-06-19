@@ -23,18 +23,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <com.wintersportcoaches.common.ui.views.IconWithHeaderTextView
+            android:id="@+id/kind_of_sport_tv"
             app:iconImage="@drawable/vector_snowboard_ic"
             app:titleText="Вид спорта"
             android:paddingBottom="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <com.wintersportcoaches.common.ui.views.IconWithHeaderTextView
+            android:id="@+id/start_time_tv"
             android:paddingBottom="8dp"
             app:iconImage="@drawable/vector_time_ic"
             app:titleText="Вид спорта"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <com.wintersportcoaches.common.ui.views.IconWithHeaderTextView
+            android:id="@+id/location_tv"
             android:paddingBottom="8dp"
             app:iconImage="@drawable/vector_location_ic"
             app:titleText="Вид спорта"

@@ -36,6 +36,20 @@ public interface NetworkService {
     @POST("/api/user/users_get/")
     Call<List<BaseUser>> users_get();
 
+
+
+
+    @FormUrlEncoded
+    @POST("/api/training/get_list/")
+    Call<List<Lesson>> lesson_get(@Field("hash") String hash);
+
+    @FormUrlEncoded
+    @POST("/api/training/get_my_list/")
+    Call<List<Lesson>> lesson_get_by_statuses(@Field("hash") String hash,
+                                              @Field("statuses") List<Integer> statuses,
+                                              @Field("i_am_as") String userType);
+
+
     @FormUrlEncoded
     @POST("/api/user/get/")
     Call<BaseUser> user_get(@Field("id") int id);

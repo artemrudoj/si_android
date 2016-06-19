@@ -13,8 +13,8 @@ import com.wintersportcoaches.common.service.SocketListenerService;
 import com.wintersportcoaches.pupil.chats.ChatsContainerActivity;
 import com.wintersportcoaches.pupil.coaches.CoachesListContainerActivity;
 import com.wintersportcoaches.pupil.lesson.create.CreateLessonActivity;
-import com.wintersportcoaches.pupil.lesson.lessonlist.HistoryLessonActivity;
-import com.wintersportcoaches.pupil.lesson.lessonlist.LessonListActivity;
+import com.wintersportcoaches.pupil.lesson.list.HistoryLessonActivity;
+import com.wintersportcoaches.pupil.lesson.list.LessonListActivity;
 import com.wintersportcoaches.pupil.profile.ProfileContainerActivity;
 
 import java.util.ArrayList;

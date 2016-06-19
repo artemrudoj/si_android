@@ -11,7 +11,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/WinterSportCoachesTheme">
-        <activity android:name=".lesson.lessonlist.LessonListActivity"/>
+        <activity android:name=".lesson.list.LessonListActivity"/>
         <activity android:name=".NavigationDrawerPupilActivity" />
         <activity android:name=".lesson.create.CreateLessonActivity"
             android:launchMode="singleTask">
@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".coaches.CoachesListContainerActivity" />
-        <activity android:name=".lesson.lessonlist.HistoryLessonActivity" />
+        <activity android:name=".lesson.list.HistoryLessonActivity" />
         <activity android:name=".chats.ChatsContainerActivity" />
         <activity android:name=".profile.ProfileContainerActivity"/>
     </application>

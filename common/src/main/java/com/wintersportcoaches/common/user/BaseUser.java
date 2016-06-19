@@ -15,6 +15,10 @@ import java.util.ArrayList;
  */
 public class BaseUser {
 
+
+    public static final String LEARNER = "l";
+    public static final String COACH = "c";
+
     public static final String DEFAULT_FIRST_NAME = "Регистрация";
     public static final String DEFAULT_LAST_NAME = "";
     public static final String DEFAULT_TELEPOHNE = "";

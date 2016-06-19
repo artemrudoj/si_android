@@ -1,4 +1,4 @@
-package com.wintersportcoaches.pupil.lesson.lessonlist;
+package com.wintersportcoaches.pupil.lesson.list;
 
 import android.os.Bundle;
 
