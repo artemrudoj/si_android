@@ -2,6 +2,7 @@ package com.wintersportcoaches.common.user;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.widget.TextView;
 
 import com.artem.common.R;
@@ -27,7 +28,7 @@ public class BaseUser {
     public static final String ID_ARGS = "id";
     public static final String RATING_ARG = "rating";
     public static final String EMAIL_ARG = "EMAIL_ARG";
-
+    public static final String EXTRA_USER = "BaseUser.EXTRA_USER";
 
 
     public int getUserId() {
@@ -110,8 +111,27 @@ public class BaseUser {
     public void setLogin(boolean login) {
         isLogin = login;
     }
-
-
+    public Bundle toBundle() {
+        Bundle bundle = new Bundle();
+        bundle.putString(FIRST_NAME_ARG, firstName);
+        bundle.putString(LAST_NAME_ARG, lastName);
+        bundle.putString(TELEPHONE_ARG, phone);
+        bundle.putString(PHOTO_BACKEND_ARG, photoUrl);
+        bundle.putInt(ID_ARGS, userId);
+        bundle.putFloat(RATING_ARG, rating);
+        bundle.putString(EMAIL_ARG, email);
+        return bundle;
+    }
+    public BaseUser(Bundle bundle) {
+        firstName = bundle.getString(FIRST_NAME_ARG);
+        lastName = bundle.getString(LAST_NAME_ARG);
+        phone = bundle.getString(TELEPHONE_ARG);
+        photoUrl = bundle.getString(PHOTO_BACKEND_ARG);
+        hash = bundle.getString(HASH_ARG);
+        userId =  bundle.getInt(ID_ARGS);
+        rating = bundle.getFloat(RATING_ARG);
+        email = bundle.getString(EMAIL_ARG);
+    }
     public void setDefaultProperties() {
         firstName = DEFAULT_FIRST_NAME;
         lastName = DEFAULT_LAST_NAME;
@@ -123,6 +143,8 @@ public class BaseUser {
         rating = 0;
         email = "";
     }
+
+
 
     public String getFullName() {
         if(firstName.equals("") || lastName.equals(""))

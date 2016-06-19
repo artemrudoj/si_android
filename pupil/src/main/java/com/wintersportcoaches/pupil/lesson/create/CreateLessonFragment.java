@@ -2,6 +2,7 @@ package com.wintersportcoaches.pupil.lesson.create;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
@@ -10,7 +11,9 @@ import android.view.ViewGroup;
 
 import com.wintersportcoaches.common.base.presenter.PresenterManager;
 import com.wintersportcoaches.common.base.presenter.PresenteredFragment;
+import com.wintersportcoaches.common.user.BaseUser;
 import com.wintersportcoaches.pupil.R;
+import com.wintersportcoaches.pupil.ui.view.ChooseCoachView;
 
 import java.util.Calendar;
 
@@ -19,6 +22,13 @@ import java.util.Calendar;
  */
 public class CreateLessonFragment extends PresenteredFragment {
 
+    ChooseCoachView chooseCoachView;
+    public void onNewIntent(Intent intent) {
+        if(intent.hasExtra(BaseUser.EXTRA_USER)) {
+            BaseUser user = new BaseUser(intent.getExtras().getBundle(BaseUser.EXTRA_USER));
+            chooseCoachView.addUser(user);
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -72,5 +82,6 @@ public class CreateLessonFragment extends PresenteredFragment {
                 dialog.show();
             }
         });
+        chooseCoachView = (ChooseCoachView)view.findViewById(R.id.choise_coach_ccv);
     }
 }

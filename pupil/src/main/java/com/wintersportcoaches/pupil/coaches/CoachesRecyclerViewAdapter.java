@@ -30,6 +30,7 @@ public class CoachesRecyclerViewAdapter extends BaseRecyclerViewAdapter<CoachesV
 
     @Override
     public CoachesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
         return new CoachesViewHolder((CardView)LayoutInflater.from(parent.getContext()).inflate(R.layout.intructor_list_row, parent, false), activityHolder);
     }
 
@@ -39,10 +40,5 @@ public class CoachesRecyclerViewAdapter extends BaseRecyclerViewAdapter<CoachesV
         holder.setItem(data.get(position));
         holder.setPosition(position);
 
-    }
-
-
-    public  interface IClickListener {
-        void onClick(int position);
     }
 }

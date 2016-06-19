@@ -22,4 +22,6 @@
     <string name="password_requirements">Длина пароля не может быть короче 5 символов</string>
     <string name="incorrect_email">Некорректный e-mail</string>
     <string name="incorrect_password_repeat">Пароли не совпадают</string>
+    <string name="add">ДОБАВИТЬ</string>
+    <string name="delete">УДАЛИТЬ</string>
 </resources>

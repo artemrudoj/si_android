@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/radio_button_with_text"/>
+    <com.wefika.flowlayout.FlowLayout
+        android:id="@+id/coaches_fl"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="40dp"
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <com.wintersportcoaches.pupil.ui.view.InstructorSmallWithButton
+            android:id="@+id/add_insturcor_isw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </com.wefika.flowlayout.FlowLayout>
+</LinearLayout>

@@ -32,7 +32,6 @@ public interface NetworkService {
                                @Field("is_couch") Boolean isCoach);
 
 
-    @FormUrlEncoded
     @POST("/api/user/users_get/")
     Call<List<BaseUser>> users_get();
 

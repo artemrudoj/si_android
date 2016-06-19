@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.wintersportcoaches.common.ui.views.IconWithHeaderTextView
+        android:id="@+id/instructors_iwhtv"
+        app:titleText="Инструктора"
+        app:iconImage="@drawable/vector_coaches_ic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <com.wintersportcoaches.common.ui.views.RadioRelativeLayout
+        android:id="@+id/radio_rrl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <com.wintersportcoaches.pupil.ui.view.RadioButtonWithText
+            android:id="@+id/to_all_rbwt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <com.wintersportcoaches.pupil.ui.view.RadioButtonWithFlow
+            android:id="@+id/to_one_rbwf"
+            android:layout_below="@+id/to_all_rbwt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.wintersportcoaches.common.ui.views.RadioRelativeLayout>
+</LinearLayout>

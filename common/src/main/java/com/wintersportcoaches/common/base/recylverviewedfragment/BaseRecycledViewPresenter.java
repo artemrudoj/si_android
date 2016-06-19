@@ -40,14 +40,16 @@ public abstract class BaseRecycledViewPresenter<M,V> extends BasePresenter<M,V> 
         public void onFailure(Call<List<M>> call, Throwable t) {
             super.onFailure(call, t);
             isLoadingData = false;
-            ((RecycledBaseView) view()).stopLoading();
+            V view = view();
+            if(view != null) ((RecycledBaseView) view).stopLoading();
         }
 
         @Override
         public void onResponse(Call<List<M>> call, Response<List<M>> response) {
             super.onResponse(call, response);
             isLoadingData = false;
-            ((RecycledBaseView) view()).stopLoading();
+            V view = view();
+            if(view != null) ((RecycledBaseView) view).stopLoading();
         }
 
         @Override
