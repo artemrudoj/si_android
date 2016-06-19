@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -36,21 +37,12 @@
         android:orientation="horizontal"
         android:layout_height="wrap_content">
         <TextView
-            android:text="asdasd"
+            tools:text="asdasd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:textColor="@android:color/white"
             android:gravity="start"
-            android:id="@+id/first_name_tv"/>
-        <TextView
-            android:text="asdasd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="5dp"
-            android:textSize="16sp"
-            android:textColor="@android:color/white"
-            android:gravity="start"
-            android:id="@+id/last_name_tv"/>
+            android:id="@+id/name_tv"/>
     </LinearLayout>
 </LinearLayout>

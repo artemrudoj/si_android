@@ -7,7 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import com.artem.common.R;
+import com.wintersportcoaches.common.login.LoginActivity;
 import com.wintersportcoaches.common.profile.ProfileFragment;
 import com.wintersportcoaches.common.user.BaseUser;
 
@@ -15,9 +18,17 @@ public class NavigarionDrawerHeaderView extends LinearLayout {
     ImageView profileImageView;
     Class<?> profileActivity;
     BaseUser user;
-
+    TextView nameTextView;
     public void setUser(BaseUser user) {
         this.user = user;
+        bindViews();
+        nameTextView.setText(user.getFullName());
+    }
+
+    public void updateView() {
+        if((user != null) && nameTextView != null) {
+            nameTextView.setText(user.getFullName());
+        }
     }
 
     public void setProfileActivityClass(Class<?> profileActivity ){
@@ -49,7 +60,11 @@ public class NavigarionDrawerHeaderView extends LinearLayout {
         profileImageView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToChangeProfileActivity();
+                if(user.isLogin()) {
+                    goToChangeProfileActivity();
+                } else {
+                    LoginActivity.go(getContext());
+                }
             }
         });
     }
@@ -58,6 +73,11 @@ public class NavigarionDrawerHeaderView extends LinearLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
         setImageClickListener();
+        bindViews();
+    }
+
+    void bindViews() {
+        if(nameTextView == null) nameTextView = (TextView)findViewById(R.id.name_tv);
     }
 
     void goToChangeProfileActivity(){

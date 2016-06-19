@@ -66,6 +66,7 @@ public class NavigationDrawerPupilActivity extends NavigationDrawerProfileActivi
                 WinterSportCoachesApplication.get(NavigationDrawerPupilActivity.this).
                         exitFromCurrentUser();
                 SocketListenerService.stop(getApplicationContext());
+                headerView.updateView();
             }
         }));
 

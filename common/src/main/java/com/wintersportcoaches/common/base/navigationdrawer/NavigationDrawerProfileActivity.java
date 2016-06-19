@@ -30,6 +30,12 @@ public abstract class NavigationDrawerProfileActivity  extends UserActivity impl
     protected NavigarionDrawerHeaderView headerView;
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        headerView.updateView();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);

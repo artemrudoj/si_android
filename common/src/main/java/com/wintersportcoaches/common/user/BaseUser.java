@@ -144,10 +144,19 @@ public class BaseUser {
         email = "";
     }
 
+    public void init(BaseUser user) {
+        firstName = user.getFirstName();
+        lastName = user.getLastName();
+        phone = user.getPhone();
+        photoUrl = user.getPhotoUrl();
+        userId =  user.getUserId();
+        rating = user.getRating();
+        email = user.getEmail();
+    }
 
 
     public String getFullName() {
-        if(firstName.equals("") || lastName.equals(""))
+        if(firstName.equals("") && lastName.equals(""))
             throw new IllegalStateException("names cannot be empty");
         return firstName + " " + lastName;
     }

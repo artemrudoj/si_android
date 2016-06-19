@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
+        android:padding="16dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -89,5 +90,14 @@
             android:id="@+id/choise_coach_ccv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/send_btn"
+            android:layout_marginTop="56dp"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="?colorPrimary"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:text="Отправить"/>
     </LinearLayout>
 </ScrollView>

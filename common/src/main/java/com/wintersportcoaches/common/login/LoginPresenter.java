@@ -18,7 +18,7 @@ import retrofit2.Response;
  */
 public class LoginPresenter extends BasePresenter<BaseUser, LoginView> {
     private boolean mIsLoadingData = false;
-    NetworkService mNetworkService;
+    final NetworkService mNetworkService;
     LocalDataRepository repository;
 
     public LoginPresenter(NetworkService mNetworkService, LocalDataRepository repository) {
@@ -53,17 +53,31 @@ public class LoginPresenter extends BasePresenter<BaseUser, LoginView> {
                             }
 
                             @Override
-                            public void onResponse(Call<LoginResponseSerializer> call, Response<LoginResponseSerializer> response) {
-                                super.onResponse(call, response);
-                                mIsLoadingData = false;
-                            }
-
-                            @Override
                             protected void success(Call<LoginResponseSerializer> call, Response<LoginResponseSerializer> response) {
                                 model.setHash(response.body().getHash());
-                                model.setUserId(response.body().getId());
-                                repository.saveUser(model);
-                                if(view() != null) view().successLogin();
+                                mNetworkService.user_get(response.body().getId()).enqueue(new CommonErrorHandleRetofitCallback<BaseUser>() {
+                                    @Override
+                                    public void onResponse(Call<BaseUser> call, Response<BaseUser> response) {
+                                        super.onResponse(call, response);
+                                        mIsLoadingData = false;
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<BaseUser> call, Throwable t) {
+                                        super.onFailure(call, t);
+                                        mIsLoadingData = false;
+                                    }
+
+                                    @Override
+                                    protected void success(Call<BaseUser> call, Response<BaseUser> response) {
+                                        super.success(call, response);
+                                        model.init(response.body());
+                                        model.setLogin(true);
+                                        repository.saveUser(model);
+                                        if(view() != null) view().successLogin();
+                                    }
+                                });
+
                             }
                         });
                 mIsLoadingData = true;

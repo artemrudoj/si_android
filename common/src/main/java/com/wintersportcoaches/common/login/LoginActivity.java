@@ -1,6 +1,8 @@
 package com.wintersportcoaches.common.login;
 
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.artem.common.R;
@@ -17,5 +19,11 @@ public class LoginActivity extends UserActivity {
         if(savedInstanceState == null) {
             getFragmentManager().beginTransaction().add(R.id.container, new LoginFragment()).commit();
         }
+    }
+
+
+    public static void go(Context context) {
+        Intent intent = new Intent(context, LoginActivity.class);
+        context.startActivity(intent);
     }
 }
