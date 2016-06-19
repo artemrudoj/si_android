@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
     <LinearLayout
         android:padding="16dp"
         android:orientation="vertical"
@@ -29,8 +29,8 @@
                 android:layout_marginLeft="16dp"
                 android:id="@+id/ski_cbwt"
                 android:layout_toRightOf="@+id/snowboard_cbwt"
-                app:titleText="Сноуборд"
-                app:iconImage="@drawable/vector_snowboard_ic"
+                app:titleText="Горные лыжи"
+                app:iconImage="@drawable/vector_ski_ic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </com.wintersportcoaches.common.ui.views.RadioRelativeLayout>
@@ -75,9 +75,15 @@
         <com.wintersportcoaches.common.ui.views.IconWithHeaderTextView
             app:iconImage="@drawable/vector_location_ic"
             app:titleText="Место"
-            android:paddingBottom="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/place_et"
+            android:hint="место"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp" />
+
         <!--<com.wintersportcoaches.common.ui.views.IconWithHeaderTextView-->
             <!--android:id="@+id/time_icwht"-->
             <!--app:iconImage="@drawable/vector_time_ic"-->
@@ -92,6 +98,13 @@
             app:titleText="Дата"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/date_tv"
+            tools:text="asdasdsad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
         <!--<com.wintersportcoaches.common.ui.views.IconWithHeaderTextView-->
             <!--android:id="@+id/dration_icwht"-->
             <!--app:iconImage="@drawable/vector_duration_ic"-->
@@ -99,6 +112,8 @@
             <!--android:layout_width="match_parent"-->
             <!--android:layout_height="wrap_content"/>-->
         <com.wintersportcoaches.pupil.ui.view.ChooseCoachView
+
+            android:paddingTop="8dp"
             android:id="@+id/choise_coach_ccv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

@@ -54,8 +54,8 @@ public interface NetworkService {
     Call<Chat> get_chat_with_user(@Field("hash") String hash, @Field("id") int id);
 
     @FormUrlEncoded
-    @POST("/api/chat/get_with_user/")
-    Call<Lesson> create_lesson(@Field("hash") String hash,
+    @POST("/api/training/create/")
+    Call<Object> create_lesson(@Field("hash") String hash,
                                @Field("place_string") String placeString,
                                @Field("type") int type,
                                @Field("time_start") String time_start,

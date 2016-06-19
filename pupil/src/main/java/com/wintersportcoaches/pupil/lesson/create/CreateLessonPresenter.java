@@ -43,21 +43,21 @@ public class CreateLessonPresenter extends BasePresenter<Lesson, CreateLessonVie
                         view.getPlace(),
                         view.getType(),
                         view.getStartTime(),
-                        view.getCoach()).enqueue(new CommonErrorHandleRetofitCallback<Lesson>() {
+                        view.getCoach()).enqueue(new CommonErrorHandleRetofitCallback<Object>() {
                     @Override
-                    public void onFailure(Call<Lesson> call, Throwable t) {
+                    public void onFailure(Call<Object> call, Throwable t) {
                         super.onFailure(call, t);
                         mIsLoadingData = false;
                     }
 
                     @Override
-                    public void onResponse(Call<Lesson> call, Response<Lesson> response) {
+                    public void onResponse(Call<Object> call, Response<Object> response) {
                         super.onResponse(call, response);
                         mIsLoadingData = false;
                     }
 
                     @Override
-                    protected void success(Call<Lesson> call, Response<Lesson> response) {
+                    protected void success(Call<Object> call, Response<Object> response) {
                         super.success(call, response);
                         CreateLessonView view = view();
                         if(view != null) view.successCreated();

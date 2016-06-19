@@ -10,15 +10,23 @@ import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.wintersportcoaches.common.WinterSportCoachesApplication;
 import com.wintersportcoaches.common.base.presenter.PresenterManager;
 import com.wintersportcoaches.common.base.presenter.PresenteredFragment;
+import com.wintersportcoaches.common.login.LoginActivity;
+import com.wintersportcoaches.common.model.Lesson;
 import com.wintersportcoaches.common.rest.service.NetworkServiceFactory;
 import com.wintersportcoaches.common.ui.tools.DatePickerFragment;
+import com.wintersportcoaches.common.ui.views.CircleButtonWithText;
 import com.wintersportcoaches.common.user.BaseUser;
 import com.wintersportcoaches.pupil.R;
+import com.wintersportcoaches.pupil.lesson.lessonlist.LessonListActivity;
 import com.wintersportcoaches.pupil.ui.view.ChooseCoachView;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -27,8 +35,12 @@ import java.util.Date;
  */
 public class CreateLessonFragment extends PresenteredFragment implements CreateLessonView {
 
+    CircleButtonWithText skiCircleButtonWithText;
+    CircleButtonWithText snowboardCircleButtonWithText;
+
     private static final int REQUEST_DATE = 1234 ;
     ChooseCoachView chooseCoachView;
+    TextView dateTextView;
     public void onNewIntent(Intent intent) {
         if(intent.hasExtra(BaseUser.EXTRA_USER)) {
             BaseUser user = new BaseUser(intent.getExtras().getBundle(BaseUser.EXTRA_USER));
@@ -72,6 +84,7 @@ public class CreateLessonFragment extends PresenteredFragment implements CreateL
                 dialog.show(manager, null);
             }
         });
+        dateTextView = (TextView)view.findViewById(R.id.date_tv);
 //        view.findViewById(R.id.time_icwht).setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -80,6 +93,14 @@ public class CreateLessonFragment extends PresenteredFragment implements CreateL
 //            }
 //        });
         chooseCoachView = (ChooseCoachView)view.findViewById(R.id.choise_coach_ccv);
+        skiCircleButtonWithText = (CircleButtonWithText)view.findViewById(R.id.ski_cbwt);
+        snowboardCircleButtonWithText = (CircleButtonWithText)view.findViewById(R.id.snowboard_cbwt);
+        view.findViewById(R.id.send_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((CreateLessonPresenter)presenter).createLessonPressed();
+            }
+        });
     }
 
     @Override
@@ -90,27 +111,43 @@ public class CreateLessonFragment extends PresenteredFragment implements CreateL
         if (requestCode == REQUEST_DATE) {
             Date date = (Date) data
                     .getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+            String reportDate = df.format(date);
+            setDate(reportDate);
         }
+    }
+
+    void setDate(String date) {
+        dateTextView.setVisibility(View.VISIBLE);
+        dateTextView.setText(date);
     }
 
     @Override
     public String getHash() {
+        Activity activity = getActivity();
+        if(activity != null) {
+            BaseUser user = ((WinterSportCoachesApplication)activity.getApplication()).getUser();
+            if (user.getHash().equals("")) LoginActivity.go(activity);
+            else return user.getHash();
+        }
         return null;
     }
 
     @Override
     public String getPlace() {
-        return "Рощза хутор";
+        return "Роза хутор";
     }
 
     @Override
     public int getType() {
-        return 0;
+        if(snowboardCircleButtonWithText.isChecked()) return Lesson.SNOWBOARD;
+        else  if(skiCircleButtonWithText.isChecked()) return Lesson.SKI;
+        else throw new IllegalStateException("type must be chosen");
     }
 
     @Override
     public String getStartTime() {
-        return null;
+        return dateTextView.getText().toString();
     }
 
     @Override
@@ -120,12 +157,16 @@ public class CreateLessonFragment extends PresenteredFragment implements CreateL
 
     @Override
     public void successCreated() {
-
+        Activity activity = getActivity();
+        if(activity != null) {
+            Intent intent = new Intent(activity, LessonListActivity.class);
+            activity.startActivity(intent);
+        }
     }
 
     @Override
     public boolean isValidate() {
-        return false;
+        return getPlace() != null && getHash() != null && getStartTime() != null && !getStartTime().equals("");
     }
 
     @Override
