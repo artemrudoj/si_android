@@ -36,7 +36,7 @@ public class NavigationDrawerPupilActivity extends NavigationDrawerProfileActivi
                 startActivity(new Intent(NavigationDrawerPupilActivity.this, CreateLessonActivity.class));
             }
         }));
-        items.add(new NavigationItem(R.drawable.vector_list_ic, R.string.my_lessons, false, false,new TapHandler() {
+        items.add(new NavigationItem(R.drawable.vector_list_ic, R.string.my_lessons, true, false,new TapHandler() {
             @Override
             public void onTap() {
                 startActivity(new Intent(NavigationDrawerPupilActivity.this, LessonListActivity.class));
@@ -54,7 +54,7 @@ public class NavigationDrawerPupilActivity extends NavigationDrawerProfileActivi
                 startActivity(new Intent(NavigationDrawerPupilActivity.this, ChatsContainerActivity.class));
             }
         }));
-        items.add(new NavigationItem(R.drawable.vector_history_ic, R.string.history_list, false, false, new TapHandler() {
+        items.add(new NavigationItem(R.drawable.vector_history_ic, R.string.history_list, true, false, new TapHandler() {
             @Override
             public void onTap() {
                 startActivity(new Intent(NavigationDrawerPupilActivity.this, HistoryLessonActivity.class));
