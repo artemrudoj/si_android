@@ -1,6 +1,7 @@
 package com.wintersportcoaches.common.login;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -29,7 +30,7 @@ import com.wintersportcoaches.common.utils.ValidationUtils;
  * A simple {@link Fragment} subclass.
  */
 public class LoginFragment extends PresenteredFragment<LoginPresenter> implements LoginView {
-
+    static public final  int FINISH = 1234;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -120,7 +121,19 @@ public class LoginFragment extends PresenteredFragment<LoginPresenter> implement
     @Override
     public void goToRegistrationActivity() {
         Intent intent = new Intent(getActivity(), RegistrationActivity.class);
-        getActivity().startActivity(intent);
+        startActivityForResult(intent, FINISH);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode != Activity.RESULT_OK)
+            return;
+        switch (requestCode) {
+            case FINISH:
+                getActivity().finish();
+                break;
+        }
     }
 
     @Override

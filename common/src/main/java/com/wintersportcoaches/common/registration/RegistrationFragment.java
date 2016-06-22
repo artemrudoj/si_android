@@ -27,6 +27,7 @@ import com.soundcloud.android.crop.Crop;
 import com.wintersportcoaches.common.WinterSportCoachesApplication;
 import com.wintersportcoaches.common.base.presenter.PresenterManager;
 import com.wintersportcoaches.common.base.presenter.PresenteredFragment;
+import com.wintersportcoaches.common.login.LoginFragment;
 import com.wintersportcoaches.common.rest.service.NetworkServiceFactory;
 import com.wintersportcoaches.common.ui.tools.PhoneTextWatcher;
 import com.wintersportcoaches.common.ui.tools.ValidationTextWatcher;
@@ -343,6 +344,8 @@ public class RegistrationFragment extends PresenteredFragment<RegistrationPresen
     public void successRegistration() {
         Activity activity = getActivity();
         if(activity != null) {
+            Intent intent = new Intent();
+            activity.setResult(Activity.RESULT_OK, intent);
             activity.finish();
         }
     }
