@@ -3,6 +3,7 @@
     package="com.artem.common">
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -14,11 +15,9 @@
         <activity android:name="com.wintersportcoaches.common.registration.RegistrationActivity" />
 
 
-
+        <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
         <service
-            android:name="com.wintersportcoaches.common.service.SocketListenerService"
-            android:enabled="true"
-            android:exported="true"/>
+            android:name="com.wintersportcoaches.common.service.SocketListenerService" />
     </application>
 
 </manifest>

@@ -8,6 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+
 /**
  * Created by artem on 23.05.16.
  */
@@ -45,4 +48,6 @@ public class Utils {
     public static String fromIntPriceToString(int price) {
         return Integer.toString(price) + " руб/час";
     }
+
+
 }

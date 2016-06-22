@@ -1,5 +1,6 @@
 package com.wintersportcoaches.common.registration;
 
+import android.net.Uri;
 import android.support.annotation.NonNull;
 
 import com.wintersportcoaches.common.base.presenter.BasePresenter;
@@ -9,8 +10,12 @@ import com.wintersportcoaches.common.rest.LoginResponseSerializer;
 import com.wintersportcoaches.common.rest.handleerror.CommonErrorHandleRetofitCallback;
 import com.wintersportcoaches.common.rest.service.NetworkService;
 import com.wintersportcoaches.common.user.BaseUser;
+import com.wintersportcoaches.common.utils.CommonUtils;
 import com.wintersportcoaches.common.utils.Utils;
 
+import java.io.IOException;
+
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -22,10 +27,12 @@ public class RegistrationPresenter extends BasePresenter<BaseUser, RegistrationV
     private boolean mIsLoadingData = false;
     NetworkService mNetworkService;
     LocalDataRepository repository;
+    BaseUser user;
 
-    public RegistrationPresenter(NetworkService networkService, LocalDataRepository repository) {
+    public RegistrationPresenter(NetworkService networkService, LocalDataRepository repository, BaseUser user) {
         this.mNetworkService = networkService;
         this.repository = repository;
+        this.user = user;
     }
 
     @Override
@@ -46,12 +53,26 @@ public class RegistrationPresenter extends BasePresenter<BaseUser, RegistrationV
         RegistrationView registrationView = view();
         if(registrationView != null) {
             if (registrationView.isValid()) {
-                mNetworkService.user_register(Utils.getPhoneNumberFromFormattedNumber(registrationView.getPhoneNumber()),
-                        registrationView.getPassword(),
-                        registrationView.getFirstName(),
-                        registrationView.getLastName(),
-                        registrationView.getEmail(),
-                        registrationView.isCoach())
+
+
+                Uri newProfileImageUri = registrationView.getPhotoImageURI();
+                MultipartBody.Part imageBody = null;
+                if (newProfileImageUri != null) {
+                    try {
+                        imageBody = CommonUtils.createImageJsonObject(newProfileImageUri.getPath());
+                        user.setPhotoLocalUrl(newProfileImageUri.getPath() + CommonUtils.SCALED_DOWN_SUFFIX);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        imageBody = null;
+                    }
+
+                }
+                mNetworkService.user_register(CommonUtils.fromStringToRequestBody(Utils.getPhoneNumberFromFormattedNumber(registrationView.getPhoneNumber())),
+                        CommonUtils.fromStringToRequestBody(registrationView.getPassword()),
+                        CommonUtils.fromStringToRequestBody(registrationView.getFirstName()),
+                        CommonUtils.fromStringToRequestBody(registrationView.getLastName()),
+                        CommonUtils.fromStringToRequestBody( registrationView.getEmail()),
+                        registrationView.isCoach(),imageBody)
                         .enqueue(new CommonErrorHandleRetofitCallback<LoginResponseSerializer>() {
 
                             @Override

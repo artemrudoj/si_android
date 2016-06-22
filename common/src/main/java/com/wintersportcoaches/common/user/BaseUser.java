@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import com.artem.common.R;
 import com.google.gson.annotations.SerializedName;
+import com.wintersportcoaches.common.rest.service.NetworkService;
+import com.wintersportcoaches.common.rest.service.NetworkServiceFactory;
 
 import java.util.ArrayList;
 
@@ -14,6 +16,14 @@ import java.util.ArrayList;
  * Created by artem on 22.05.16.
  */
 public class BaseUser {
+
+    public void setPhotoLocalUrl(String photoLocalUrl) {
+        this.photoLocalUrl = photoLocalUrl;
+    }
+
+    public String getPhotoLocalUrl() {
+        return photoLocalUrl;
+    }
 
 
     public static final String LEARNER = "l";
@@ -33,7 +43,7 @@ public class BaseUser {
     public static final String RATING_ARG = "rating";
     public static final String EMAIL_ARG = "EMAIL_ARG";
     public static final String EXTRA_USER = "BaseUser.EXTRA_USER";
-
+    private transient String photoLocalUrl;
 
     public int getUserId() {
         return userId;
@@ -56,6 +66,15 @@ public class BaseUser {
     @SerializedName("rating") private float rating;
 
     @SerializedName("image") private String photoUrl;
+
+
+    public void setPhotoUrl(String photoUrl) {
+        if (photoUrl == null || photoUrl.contains("default")) {
+            this.photoUrl = "";
+        } else {
+            this.photoUrl = NetworkServiceFactory.WSC_SERVER_URL + photoUrl;
+        }
+    }
 
 
     private transient boolean isLogin;
@@ -108,9 +127,6 @@ public class BaseUser {
         this.rating = rating;
     }
 
-    public void setPhotoUrl(String photoUrl) {
-        this.photoUrl = photoUrl;
-    }
 
     public void setLogin(boolean login) {
         isLogin = login;
