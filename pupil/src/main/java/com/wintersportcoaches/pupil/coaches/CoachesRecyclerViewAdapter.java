@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.wintersportcoaches.common.ActivityHolder;
 import com.wintersportcoaches.common.base.recylverviewedfragment.BaseRecyclerViewAdapter;
 import com.wintersportcoaches.common.user.BaseUser;
+import com.wintersportcoaches.common.utils.NetworkUtils;
 import com.wintersportcoaches.pupil.R;
 import com.wintersportcoaches.pupil.user.PupilUser;
 
@@ -36,9 +37,14 @@ public class CoachesRecyclerViewAdapter extends BaseRecyclerViewAdapter<CoachesV
 
     @Override
     public void onBindViewHolder(CoachesViewHolder holder, int position) {
-
         holder.setItem(data.get(position));
         holder.setPosition(position);
+        NetworkUtils.loadProfileImage(data.get(position).getPhotoUrlWithServerUrl(),
+                holder.profileImageView, null, null,  holder.profileImageView.getContext());
+    }
 
+    @Override
+    public void onViewRecycled(final CoachesViewHolder holder) {
+        holder.cleanup();
     }
 }

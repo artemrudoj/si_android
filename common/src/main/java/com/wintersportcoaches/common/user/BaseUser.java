@@ -43,6 +43,7 @@ public class BaseUser {
     public static final String RATING_ARG = "rating";
     public static final String EMAIL_ARG = "EMAIL_ARG";
     public static final String EXTRA_USER = "BaseUser.EXTRA_USER";
+    public static final String PHOTO_LOCAL_ARG = "PHOTO_LOCAL_ARG";
     private transient String photoLocalUrl;
 
     public int getUserId() {
@@ -69,13 +70,21 @@ public class BaseUser {
 
 
     public void setPhotoUrl(String photoUrl) {
-        if (photoUrl == null || photoUrl.contains("default")) {
-            this.photoUrl = "";
-        } else {
-            this.photoUrl = NetworkServiceFactory.WSC_SERVER_URL + photoUrl;
-        }
+//        if (photoUrl == null || photoUrl.contains("default")) {
+//            this.photoUrl = "";
+//        } else {
+//            this.photoUrl = NetworkServiceFactory.WSC_SERVER_URL + photoUrl;
+//        }
+        this.photoUrl = photoUrl;
+    }
+    public void setPhotoUrlWithServerUrl(String photoUrl) {
+        String newUrl = NetworkServiceFactory.WSC_SERVER_URL.substring(0,NetworkServiceFactory.WSC_SERVER_URL.length()-1) + photoUrl;
+        this.photoUrl = newUrl;
     }
 
+    public String getPhotoUrlWithServerUrl() {
+        return NetworkServiceFactory.WSC_SERVER_URL.substring(0,NetworkServiceFactory.WSC_SERVER_URL.length()-1) + photoUrl;
+    }
 
     private transient boolean isLogin;
     private String hash;
@@ -137,6 +146,7 @@ public class BaseUser {
         bundle.putString(LAST_NAME_ARG, lastName);
         bundle.putString(TELEPHONE_ARG, phone);
         bundle.putString(PHOTO_BACKEND_ARG, photoUrl);
+        bundle.putString(PHOTO_LOCAL_ARG, photoLocalUrl);
         bundle.putInt(ID_ARGS, userId);
         bundle.putFloat(RATING_ARG, rating);
         bundle.putString(EMAIL_ARG, email);
@@ -147,6 +157,7 @@ public class BaseUser {
         lastName = bundle.getString(LAST_NAME_ARG);
         phone = bundle.getString(TELEPHONE_ARG);
         photoUrl = bundle.getString(PHOTO_BACKEND_ARG);
+        photoLocalUrl = bundle.getString(PHOTO_LOCAL_ARG);
         hash = bundle.getString(HASH_ARG);
         userId =  bundle.getInt(ID_ARGS);
         rating = bundle.getFloat(RATING_ARG);
@@ -157,6 +168,7 @@ public class BaseUser {
         lastName = DEFAULT_LAST_NAME;
         phone = DEFAULT_TELEPOHNE;
         photoUrl = "";
+        photoLocalUrl = "";
         isLogin = false;
         hash = "";
         userId =  0;
@@ -168,7 +180,7 @@ public class BaseUser {
         firstName = user.getFirstName();
         lastName = user.getLastName();
         phone = user.getPhone();
-        photoUrl = user.getPhotoUrl();
+        setPhotoUrl(user.getPhotoUrl());
         userId =  user.getUserId();
         rating = user.getRating();
         email = user.getEmail();

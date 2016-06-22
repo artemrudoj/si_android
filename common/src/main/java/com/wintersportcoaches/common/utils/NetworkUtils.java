@@ -27,19 +27,29 @@ public class NetworkUtils {
             @Override
             public void onSuccess() {
                 ViewGroup layout = (ViewGroup) profileImage.getParent();
-                layout.findViewById(R.id.photo_icon_iv).setVisibility(View.GONE);
-                profileImage.setBackground(null);
-                profileImage.setVisibility(View.VISIBLE);
-                photoAnimation.setVisibility(View.GONE);
+                View view = layout.findViewById(R.id.photo_icon_iv);
+                if(view != null) view.setVisibility(View.GONE);
+                if(profileImage != null) {
+                    profileImage.setBackground(null);
+                    profileImage.setVisibility(View.VISIBLE);
+                }
+                if(photoAnimation != null) {
+                    photoAnimation.setVisibility(View.GONE);
+                }
             }
 
             @Override
             public void onError() {
                 ViewGroup layout = (ViewGroup) profileImage.getParent();
-                layout.findViewById(R.id.photo_icon_iv).setVisibility(View.VISIBLE);
-                profileImage.setBackground(context.getResources().getDrawable(R.drawable.circle));
-                profileImage.setVisibility(View.VISIBLE);
-                photoAnimation.setVisibility(View.GONE);
+                View view = layout.findViewById(R.id.photo_icon_iv);
+                if(view != null) view.setVisibility(View.VISIBLE);
+                if(profileImage != null) {
+                    profileImage.setBackground(context.getResources().getDrawable(R.drawable.circle));
+                    profileImage.setVisibility(View.VISIBLE);
+                }
+                if(photoAnimation != null) {
+                    photoAnimation.setVisibility(View.GONE);
+                }
             }
         };
 
@@ -52,9 +62,9 @@ public class NetworkUtils {
                                         final ProgressBar photoAnimation,
                                         final Context context,
                                         Callback picassoCallback) {
-        profileImage.setVisibility(View.INVISIBLE);
-        photoIcon.setVisibility(View.INVISIBLE);
-        photoAnimation.setVisibility(View.VISIBLE);
+        //profileImage.setVisibility(View.INVISIBLE);
+//        if(photoIcon != null) photoIcon.setVisibility(View.INVISIBLE);
+//        if(photoAnimation != null) photoAnimation.setVisibility(View.VISIBLE);
         Picasso.with(context)
                 .load(photo)
                 .placeholder(R.drawable.vector_photo_default)

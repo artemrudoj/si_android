@@ -25,10 +25,12 @@ public class SharedPreferencesRepository implements LocalDataRepository {
         editor.putString(BaseUser.LAST_NAME_ARG, user.getLastName());
         editor.putString(BaseUser.TELEPHONE_ARG, user.getPhone());
         editor.putString(BaseUser.PHOTO_BACKEND_ARG, user.getPhotoUrl());
+        editor.putString(BaseUser.PHOTO_LOCAL_ARG, user.getPhotoLocalUrl());
         editor.putString(BaseUser.HASH_ARG, user.getHash());
         editor.putInt(BaseUser.ID_ARGS, user.getUserId());
         editor.putString(BaseUser.EMAIL_ARG, user.getEmail());
         editor.putFloat(BaseUser.RATING_ARG, user.getRating());
+
         editor.apply();
     }
 
@@ -41,6 +43,8 @@ public class SharedPreferencesRepository implements LocalDataRepository {
         user.setPhone(preferences.getString(BaseUser.TELEPHONE_ARG,
                 BaseUser.DEFAULT_TELEPOHNE));
         user.setPhotoUrl(preferences.getString(BaseUser.PHOTO_BACKEND_ARG,
+                ""));
+        user.setPhotoLocalUrl(preferences.getString(BaseUser.PHOTO_LOCAL_ARG,
                 ""));
         user.setLogin(preferences.getBoolean(BaseUser.LOGIN_ARG, false));
         user.setHash(preferences.getString(BaseUser.HASH_ARG, ""));

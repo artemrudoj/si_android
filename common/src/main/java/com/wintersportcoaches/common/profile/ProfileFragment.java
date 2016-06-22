@@ -4,15 +4,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.artem.common.R;
+import com.squareup.picasso.Picasso;
 import com.wintersportcoaches.common.base.presenter.PresenterManager;
 import com.wintersportcoaches.common.base.presenter.PresenteredFragment;
 import com.wintersportcoaches.common.model.Skill;
 import com.wintersportcoaches.common.rest.service.NetworkServiceFactory;
 import com.wintersportcoaches.common.ui.views.SkillsView;
 import com.wintersportcoaches.common.user.BaseUser;
+import com.wintersportcoaches.common.utils.FileUtils;
+import com.wintersportcoaches.common.utils.NetworkUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,7 +32,7 @@ public class ProfileFragment extends PresenteredFragment<ProfilePresenter> imple
     TextView fullNameTextView;
     TextView ageTextView;
     TextView genderTextView;
-
+    ImageView photo;
     public static ProfileFragment newInstance(Bundle args) {
         ProfileFragment profileFragment = new ProfileFragment();
         profileFragment.setArguments(args);
@@ -63,6 +67,8 @@ public class ProfileFragment extends PresenteredFragment<ProfilePresenter> imple
         fullNameTextView = (TextView)view.findViewById(R.id.full_name_tv);
         ageTextView = (TextView)view.findViewById(R.id.age_tv);
         genderTextView = (TextView)view.findViewById(R.id.gender_tv);
+        photo = (ImageView)view.findViewById(R.id.profile_image_civ);
+
     }
 
     @Override
@@ -87,5 +93,6 @@ public class ProfileFragment extends PresenteredFragment<ProfilePresenter> imple
         skills.add(skill);
         skills.add(skil2l);
         skillsView.initView(skills);
+        NetworkUtils.loadProfileImage(baseUser.getPhotoUrlWithServerUrl(), photo, null, null, getActivity());
     }
 }

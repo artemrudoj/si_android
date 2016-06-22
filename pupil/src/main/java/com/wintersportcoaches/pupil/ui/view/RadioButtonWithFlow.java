@@ -10,6 +10,7 @@ import android.widget.RadioButton;
 
 import com.wefika.flowlayout.FlowLayout;
 import com.wintersportcoaches.common.user.BaseUser;
+import com.wintersportcoaches.common.utils.NetworkUtils;
 import com.wintersportcoaches.pupil.R;
 
 /**
@@ -65,5 +66,8 @@ public class RadioButtonWithFlow extends LinearLayout implements Checkable {
         FlowLayout.LayoutParams layoutParams = new FlowLayout.LayoutParams(FlowLayout.LayoutParams.WRAP_CONTENT, FlowLayout.LayoutParams.WRAP_CONTENT);
         instructorSmallWithButton.setLayoutParams(layoutParams);
         flowLayout.addView(instructorSmallWithButton, 0);
+        NetworkUtils.loadProfileImage(user.getPhotoUrlWithServerUrl(),
+                instructorSmallWithButton.profileImage, null, null,  getContext());
+
     }
 }

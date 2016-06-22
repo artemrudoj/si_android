@@ -12,11 +12,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.wintersportcoaches.common.ActivityHolder;
 import com.wintersportcoaches.common.user.BaseUser;
 import com.wintersportcoaches.pupil.R;
 import com.wintersportcoaches.pupil.chats.dialog.MessagesListFragment;
 import com.wintersportcoaches.pupil.lesson.create.CreateLessonActivity;
+import com.wintersportcoaches.pupil.profile.ProfileContainerActivity;
 import com.wintersportcoaches.pupil.user.PupilUser;
 
 /**
@@ -29,12 +31,28 @@ public class CoachesViewHolder  extends RecyclerView.ViewHolder {
     private CardView rootView;
     private BaseUser item;
     private int position;
+    ImageView profileImageView;
+
+
+    public void cleanup() {
+        Picasso.with(profileImageView.getContext())
+                .cancelRequest(profileImageView);
+        profileImageView.setImageDrawable(null);
+    }
 
     public CoachesViewHolder(CardView itemView, final ActivityHolder activityHolder) {
         super(itemView);
         rootView = itemView;
         mFullName = (TextView)itemView.findViewById(R.id.full_name_tv);
         openChatBtn = (ImageView) itemView.findViewById(R.id.send_message_iv);
+        profileImageView = (ImageView) itemView.findViewById(R.id.profile_image);
+        profileImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = ProfileContainerActivity.goTo(v.getContext(), item.getUserId());
+                v.getContext().startActivity(intent);
+            }
+        });
         addToLessonImageView = (ImageView)itemView.findViewById(R.id.add_to_lesson_iv);
         addToLessonImageView.setOnClickListener(new View.OnClickListener() {
             @Override

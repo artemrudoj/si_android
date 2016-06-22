@@ -1,6 +1,8 @@
 package com.wintersportcoaches.pupil.profile;
 
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import com.wintersportcoaches.common.base.UserActivity;
 import com.wintersportcoaches.common.profile.MyProfileFragment;
@@ -10,6 +12,13 @@ import com.wintersportcoaches.pupil.R;
 
 
 public class ProfileContainerActivity extends UserActivity {
+
+    public static Intent goTo(Context context, int userId) {
+        Intent intent = new Intent(context, ProfileContainerActivity.class);
+        intent.putExtra(ProfileFragment.EXTRA_USER_ID, userId);
+        return intent;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
